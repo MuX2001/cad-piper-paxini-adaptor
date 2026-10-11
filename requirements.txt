@@ -1,0 +1,4 @@
+# STL loading and geometric measurements (validated with Python 3.12).
+numpy==2.5.3
+trimesh==4.12.2
+build123d==0.13.0
