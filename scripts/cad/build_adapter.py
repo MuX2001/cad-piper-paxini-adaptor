@@ -11,6 +11,7 @@ sys.dont_write_bytecode = True
 sys.path.insert(0, str(PROJECT / "cad" / "source"))
 
 from adapter import make_adapter  # noqa: E402
+from parameters import PROFILES, clamp_profile  # noqa: E402
 
 
 def main() -> None:
@@ -18,11 +19,11 @@ def main() -> None:
     parser.add_argument(
         "--profile",
         required=True,
-        choices=["m2324-reference"],
+        choices=PROFILES,
         help="use the supplied M2324 interface; print two copies of each part",
     )
     args = parser.parse_args()
-    inner_plate, outer_roof = make_adapter()
+    inner_plate, outer_roof = make_adapter(clamp_profile(args.profile))
     destination = PROJECT / "cad" / "exported"
     destination.mkdir(exist_ok=True)
 

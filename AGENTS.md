@@ -10,7 +10,7 @@ Preserve original CAD and datasheet files. Never overwrite imported vendor files
 
 ## Mechanical design practice
 
-Record assumptions about dimensions, tolerances, materials, fasteners, clearance, and the gripper and sensor mounting interfaces in `docs/interface-spec.md` or `docs/design-notes.md`. Mark unverified dimensions clearly. The requested M3234 differs from the supplied M2324 files; do not silently use one as the other. Update measured interfaces in `cad/source/parameters.py`. Document coordinate origins, axis directions, and units before converting or generating meshes; STL itself carries no unit declaration.
+Record assumptions about dimensions, tolerances, materials, fasteners, clearance, and the gripper and sensor mounting interfaces in `docs/interface-spec.md` or `docs/design-notes.md`. Mark unverified dimensions clearly. The user confirmed two M2324 sensors; M3234 is not this design target. Update measured interfaces in `cad/source/parameters.py` only after physical data arrive and the Goal is resumed. Document coordinate origins, axis directions, and units before converting or generating meshes; STL itself carries no unit declaration.
 
 ## Scripts and verification
 
@@ -18,4 +18,4 @@ Use the workspace Python environment at `~/workspace/envs/venv/gripper-cad/`; ke
 
 ## Changes and review
 
-Make focused changes and preserve uncommitted work. A change to geometry should include the reason, key dimensions or constraints, verification method, and an updated drawing or screenshot when useful. This directory has no Git history yet, so no existing commit style can be inferred.
+Make focused changes and preserve uncommitted work. A change to geometry should include the reason, key dimensions or constraints, verification method, and an updated drawing or screenshot when useful. Baseline commit is `0d7ee279b727843aca92141fbcb6ef7a688d2cf2`. Preserve reference exports and keep v2 separate. Follow `PRINT-HOLD.md`: coupon and fit gauges only until physical results are reviewed.

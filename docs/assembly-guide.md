@@ -1,30 +1,33 @@
-# Preliminary print and assembly guide
+# V2 coupon and fit-gauge guide — full print on hold
 
-**Profile:** The current exports use the supplied **IP-M2324-Core** STEP model. Install two of these sensors with their active faces facing each other. Complete the [dimensional checklist](dimensional-checklist.md) for **both** physical fingers and sensors before mounting live hardware.
+Read [PRINT-HOLD](../PRINT-HOLD.md). Both sensors are M2324; stock parts remain unmodified. Full adapter files are for digital inspection until the physical gate passes.
 
-## Parts and hardware
+## Print preparation
 
-| Item | Quantity | Notes |
-| --- | ---: | --- |
-| Printed inner plate and outer roof | 2 each | Same STEP and STL designs on both fingers; millimetres |
-| M2324 sensor | 2 | Supplied IP-M2324-Core interface; verify each physical unit |
-| M3 hex nut | 8 | Nominal 5.5 mm across flats; check the printed traps |
-| M3 pan/socket screw | 4 × 16 mm, 4 × 14 mm | Longer pair per jaw at proximal Y = −20 mm; shorter at distal Y = −6 mm. Confirm actual head diameter ≤6.2 mm and protrusion after assembly. |
-| M1.6 screw | 12 × 3 mm | Six per sensor; 2 mm deep tapped holes, head diameter ≤3.2 mm. Verify length and thread engagement on real sensors. |
-| Compliant liner | As fitted on both jaws | Start with roughly 0.7–0.8 mm removable elastomer strips on the printed cavity roof and plate. Keep them off the sensors and moving gripper surfaces. |
-| Small cable tie | 2 | One per external tie hole; check each cable bend radius. |
+Use the coupon and gauge `_print.stl` files listed in PRINT-HOLD, imported at 1 unit = 1 mm, 100% scale. Bases are at Z=0. Coupon and inner gauge print flat; roof gauge prints with distal Y=2.1 on the bed and builds toward local −Y. Use a brim for the roof's narrow footprint. The [orientation image](../drawings/screenshots/piper_m2324-v2_print_orientation.png) shows this direction on the full roof for review only.
 
-## Printing
+Use the intended printer, nozzle, material and slicer profile; record them. PETG remains a candidate, not a validated material specification. Inspect layer preview for horizontal roof M3 bores/head holes and inner nut-pocket ceilings. Add accessible local supports if needed and record removal. No long cavity bridge is required in this orientation. Coupon vertical holes do not establish horizontal-hole compensation: the roof gauge supplies that directional check.
 
-Print the two short `piper_finger_fit_gauge_*.stl` parts first and check **both** distal fingers without forcing the fit. For the full parts, use PETG as a practical initial material for a clamp; [Prusa's PETG guide](https://help.prusa3d.com/article/petg_2059) describes its use in mechanical holders and clamps. Start with a 0.4 mm nozzle, 0.2 mm layers, four perimeters, and 35% infill; these are trial settings, not strength validation. Print two inner plates with their flat sensor-mounting exteriors on the bed and two outer roofs with their flat split faces on the bed. Inspect the nut pockets and transverse tie holes in the slicer for bridging or local support needs. Do not scale the unitless STLs: their numbers are millimetres.
+## Coupon map
 
-## Assembly and first movement
+Viewed from above, the notch is at −X,−Y. Rows from the notched edge toward +Y have extra offsets **0.00, +0.10, +0.20 mm**. These are experiments, not chosen compensation. The part is 48×30 mm; plate thickness 2.6 mm, nut-test pads 3.6 mm.
 
-1. Deburr both printed sets. Trial-fit each pair of halves and four nuts around its **unmodified** stock finger. Confirm each end cap has clearance and neither finger is pinched by hard plastic.
-2. Fit removable liner strips to both printed cavities as needed for a firm, reversible grip. The tapered fingers and distal caps resist axial sliding; four M3 screws per jaw supply preload. Tighten evenly by hand and stop if the plastic distorts or the gripper coating marks.
-3. With both sensors disconnected and supported, fasten each mounting face to an inner plate with six M1.6 screws. Check that neither set of screw tips bottoms in the 2 mm blind holes. The active faces must point toward **each other** and remain uncovered.
-4. Route each lead through its proximal window. Secure separate service loops to the external roof lugs without pulling on either connector. Keep both leads clear of both moving jaws over their permitted motion.
-5. Install a clamp on each finger. Before powered motion, set a provisional **minimum commanded opening of 25 mm**. At 0 mm command, the paired sensor envelopes overlap by about 22.8 mm; do not command full closure with both installed.
-6. Move slowly from 100 mm toward 25 mm while observing both clamps, sensors, and cables. Stop at unexpected contact. Begin grasp testing at low force only after both fit and clearance checks pass.
+| X column | Test | Baseline size / depth |
+| --- | --- | --- |
+| −18 | M1.6 bore and head | Ø1.8; head Ø3.2 × 1.2 deep |
+| −6 | M3 through bore | Ø3.4 |
+| +6 | M3 bore and head | Ø3.4; head Ø6.2 × 0.5 deep |
+| +18 | M3 nut pocket and through bore | 5.716 across flats × 2.6 deep; Ø3.4 |
 
-No physical fit, fastener torque, grip load, or cable bend test has been performed. See [validation-report.md](validation-report.md) for the checks that were run.
+Row offset adds to bore/head **diameters** and nut **across-flats** size, not depth. Measure each feature and real hardware; record free fit, hand push, binding, rotation/slop and head seating. Do not force threads through a clearance hole. If no row fits, return that result without scaling the STL or changing the adapter.
+
+## Unpowered gauge fit
+
+1. Record revision, profile, STL hash, units and print settings in the [measurement form](../measurements/m2324-v2-fit-results.md).
+2. Disable powered motion. Try inner and roof gauges separately on each finger, then together. Do not scrape/drill stock fingers.
+3. Check the distal end wall, visible gaps and complete distal M3 pair. Record bare fit first. The gauge covers only the distal pair of the full design's four bolt positions.
+4. Check nuts, bores and heads against the coupon. Lengths are provisional: use the [reach table](m2324-v2-changes.md), measure actual hardware and check protrusion. No torque is specified.
+5. If testing removable liners, record upper/lower thickness and compression separately. A snug fit is not a load or slip test.
+6. Return the requested measurements/photos and stop. Do not proceed to full printing or powered grasp tests.
+
+Eventual hardware remains eight M3 bolts/nuts and twelve M1.6 sensor screws across both jaws. M1.6 seating/bottoming, selected IN/OUT connector, service loops and full-travel cable paths require confirmation. **30 mm is a conservative software trial floor for later tests, not permission to operate now or a final limit.**

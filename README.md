@@ -1,32 +1,31 @@
-# Piper tactile sensor finger adapter
+# Piper dual M2324 tactile sensor adapter
 
-This project develops reversible, FDM-printable clamps for mounting **two PaXini IP-M2324-Core tactile sensors**, one on each **unmodified AgileX Piper gripper finger**, with their active faces facing each other. The stock gripper and sensor CAD files under `assets/vendor_files/` are preserved unchanged. The editable model is build123d Python source in `cad/source/`.
+Reversible two-piece clamps for two PaXini **PX6AX-GEN3-IP-M2324-Core / PXSR-STDIP03A** sensors on unmodified AgileX Piper fingers. Each finger uses four M3 clamp bolts and six M1.6 sensor screws, with sensing faces opposed. No drilling, replacement finger or adhesive primary joint.
 
-## Current prototype
+**Physical fit hold:** only print the fastener coupon and the two fit-gauge pieces. Full adapter STEP/STLs and GLB are digital review artifacts, not a release for printing or operation. Read [PRINT-HOLD.md](PRINT-HOLD.md).
 
-The user confirmed two **M2324** sensors. The source STEP and manual identify **IP-M2324-Core PXSR-STDIP03A**; `m2324-reference` remains the build profile name because dimensions come from supplied CAD, not physical measurement. See [interface-spec.md](docs/interface-spec.md) and [validation-report.md](docs/validation-report.md).
+`m2324-reference` preserves the original geometry and exports. `m2324-v2` retains the finger cavity, sensor rear plane, six-hole pattern and assembly transforms, with shallower, fully open M3 head pockets and an external lug print ramp. See [parameter differences](docs/m2324-v2-changes.md), [validation](docs/validation-report.md) and [printing guide](docs/assembly-guide.md).
 
-Each finger receives the same two-piece bolted clamshell. A printed inner plate fastens to each M2324's six mounting holes; an outer roof captures the finger, provides a distal stop, and has an external cable-tie lug. Print **two copies of each part**. No drilling, machining, or finger replacement is required.
+## Reproduction
 
-## Organizing files
-
-Keep original supplier files in `assets/vendor_files/` or `assets/datasheets/` and record their origins and transformations in [references.md](docs/references.md). Use `cad/source/` for authored CAD, `cad/exported/` for STEP, STL, and GLB deliverables, `drawings/screenshots/` for preview images, `measurements/` for physical dimensions, and `experiments/fit_tests/` for test procedures. Write generated experiment results under `~/workspace/runs/gripper-tac-cad/`.
-
-## Rebuild and inspect
-
-The environment is `~/workspace/envs/venv/gripper-cad/`. If absent, create it outside the repository with `python3 -m venv ~/workspace/envs/venv/gripper-cad`. From this project directory:
+Python 3.12.3, environment at `~/workspace/envs/venv/gripper-cad/`. All 59 entries in requirements.lock match. If recreating on another machine, check for an existing suitable environment first:
 
 ```bash
+uv venv --python python3.12 ~/workspace/envs/venv/gripper-cad
+uv pip install --python ~/workspace/envs/venv/gripper-cad/bin/python --cache-dir ~/workspace/.cache/uv -r requirements.lock
 source ~/workspace/envs/venv/gripper-cad/bin/activate
-python -m pip install -r requirements.lock
-python scripts/cad/build_adapter.py --profile m2324-reference
-python scripts/cad/build_fit_gauge.py
-python scripts/cad/build_assembly.py --opening-mm 50
-python scripts/cad/validate_adapter.py
+python scripts/cad/build_adapter.py --profile m2324-v2
+python scripts/cad/build_fit_gauge.py --profile m2324-v2
+python scripts/cad/build_assembly.py --profile m2324-v2 --opening-mm 50
+python scripts/cad/validate_adapter.py --profile m2324-v2 --report ~/workspace/runs/gripper-tac-cad/2026-10-11_m2324-v2/v2-validation.json
 ```
 
-`requirements.txt` lists the direct dependencies; `requirements.lock` records the exact Python 3.12 environment validated on this Ubuntu workstation. The build writes two manufactured STEP solids and two printable STL meshes, each needed twice. The fit-gauge command writes two short test STLs. The assembly command writes an interactive GLB and inspection PNGs with both sensors. STEP carries millimetre units; STL is unitless, so import at **1 unit = 1 mm**. The GLB uses metres by glTF convention. FreeCAD or another STEP-capable CAD program can inspect the neutral solids; no FreeCAD compatibility test has been run.
+The baseline was reproduced separately under `~/workspace/runs/gripper-tac-cad/2026-10-11_m2324-v2/baseline/` from commit `0d7ee279b727843aca92141fbcb6ef7a688d2cf2`; four command logs are in the parent directory. Original project exports were not overwritten. Always specify `--profile m2324-v2` for v2.
 
-For visualization, use the `piper_dual_m2324_*` GLB and PNG files. The older `piper_m2324-reference_assembly*` previews show the superseded one-sensor study and are retained as a reference.
+Legacy `piper_m2324-reference_assembly*` previews show the older one-sensor study. Use `piper_dual_m2324-v2_*` for the current paired assembly.
 
-The [assembly guide](docs/assembly-guide.md) gives hardware, print orientation, and installation steps. **Use a provisional minimum command of 25 mm opening with both sensors installed:** the paired sensor envelopes overlap near full closure. No physical fit or strength test has been performed.
+STEP/CAD use mm. STL is unitless: import at **1 unit = 1 mm**, without scaling. GLB uses metres. Fit-gauge `_print.stl` files already have the recommended bed orientation; other STEP/STLs retain jaw-local coordinates. The coupon is already on Z=0.
+
+Editable models: cad/source; deliverables: cad/exported; images: drawings/screenshots; original supplier assets: assets/vendor_files; physical forms: measurements. Large logs/intermediates belong under workspace runs/gripper-tac-cad.
+
+The provisional software trial floor is **30 mm commanded opening**, not a final limit or permission to operate. Full closure conflicts with the sensors. Cable plugs, IN/OUT selection, service loops, liners, fastener fit and strength remain unverified. The sensor's 25 N measurement range is not a clamp rating. Resume only after the requested physical data arrive.

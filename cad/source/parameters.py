@@ -35,6 +35,17 @@ class ClampParameters:
     tie_lug_length: float = 6.0
     tie_lug_height: float = 6.0
     tie_hole_diameter: float = 3.2
+    # Additional diametral / across-flats compensation; zero until coupon tests.
+    m16_diameter_compensation: float = 0.0
+    m3_diameter_compensation: float = 0.0
+    head_diameter_compensation: float = 0.0
+    nut_across_flats_compensation: float = 0.0
+    open_head_pockets: bool = False
+    lug_print_ramp_run: float = 0.0
+
+    @property
+    def compensated_nut_radius(self) -> float:
+        return self.nut_circumradius + self.nut_across_flats_compensation / 3**0.5
 
     def cavity_half_width(self, y: float) -> float:
         fraction = (y - self.cavity_proximal_y) / (
@@ -51,6 +62,20 @@ class ClampParameters:
         return self.cavity_top_proximal + fraction * (
             self.cavity_top_distal - self.cavity_top_proximal
         )
+
+
+PROFILES = ("m2324-reference", "m2324-v2")
+
+
+def clamp_profile(name: str) -> ClampParameters:
+    if name == "m2324-reference":
+        return ClampParameters()
+    if name == "m2324-v2":
+        # Keep all cavity and sensor datums fixed. Distal-end-down roof printing
+        # avoids spanning the cavity; this external ramp supports the tie lug.
+        return ClampParameters(bolt_head_recess=0.5, open_head_pockets=True,
+                               lug_print_ramp_run=8.0)
+    raise ValueError(f"Unknown profile: {name}")
 
 
 @dataclass(frozen=True)

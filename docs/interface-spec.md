@@ -25,3 +25,7 @@ The M2324 row in the manual's product table (PDF page 5, printed page 2) lists a
 2. Confirm both sensors' mounting-face orientation, connector envelopes, permissible screw engagement, sensing areas, and allowable contact loads.
 3. Check the two cable routes and service loops throughout jaw motion.
 4. Confirm the minimum commanded gripper opening with both sensors installed, actual material, fasteners, and printer-specific fit clearance.
+
+## V2 physical hold
+
+The protected cavity and six-hole rear interface remain unchanged in m2324-v2. See [changes](m2324-v2-changes.md) for head-bearing geometry and recalculated screw reach. Positive rigid cavity clearance requires measured compliant liners; upper/lower thicknesses, material and compression are not yet selected. No liner grooves are introduced. The manual's IN/OUT labeling does not establish which port will be used or the plug/bend envelope. Record both ports as present and the intended connected port as pending. Preserve the window and tie lug without claiming a validated cable route. The conservative software trial floor is 30 mm, not a final limit; only coupon and gauge printing is currently allowed.

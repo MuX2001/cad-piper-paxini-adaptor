@@ -13,8 +13,8 @@ Measure the actual hardware before printing the full adapter or enabling grasp m
 | Screw head fit and engagement | M1.6 head ≤3.2 mm; target engagement ~1.6 mm | Pending |
 | M3 nut traps and bolt protrusion | 6.6 mm circumscribed trap; four side bolts | Pending |
 | Cable plugs, service loops, and bend radii, both sides | Central plate window 10.5 × 12 mm; external tie hole Ø3.2 mm | Pending |
-| Gripper command floor | Provisional 25 mm; paired CAD envelope gap about 2.2 mm | Pending physical check |
+| Gripper command floor | Conservative trial floor 30 mm; paired CAD envelope gap about 7.2 mm; not final | Pending physical check |
 | Both sensor active faces and zero-load readings | Faces oppose; no printed part should press either active surface | Pending |
 | Clamp slip and plate deflection under a controlled low-force contact | Must not loosen, rub the sensor housing, or pull the cable | Pending |
 
-Pass the short fit gauge before the full print. If the finger differs materially from the mesh, update `cad/source/parameters.py`, regenerate, and rerun `scripts/cad/validate_adapter.py`.
+Only print the coupon and short fit gauges now. Record results in [m2324-v2-fit-results.md](../measurements/m2324-v2-fit-results.md). Return data and resume the Goal before changing cavity/compensation, selecting liners, solving cable clearance or releasing a full print. Confirm the intended IN/OUT port, actual plug envelope, service loop and minimum inserted-cable bending space on each sensor.

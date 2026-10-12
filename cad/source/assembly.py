@@ -21,7 +21,7 @@ def jaw_transform(side: int, opening_mm: float) -> np.ndarray:
     return transform
 
 
-def assembly_meshes(project: Path, opening_mm: float = 50) -> dict[str, trimesh.Trimesh]:
+def assembly_meshes(project: Path, opening_mm: float = 50, profile_name: str = "m2324-reference") -> dict[str, trimesh.Trimesh]:
     """Return posed meshes, including unchanged vendor references."""
     source = project / "assets/vendor_files/agx_arm_urdf-main/agx_gripper/meshes"
     exported = project / "cad/exported"
@@ -51,7 +51,7 @@ def assembly_meshes(project: Path, opening_mm: float = 50) -> dict[str, trimesh.
         jaw = jaw_transform(side, opening_mm)
         for name in ("inner_plate", "outer_roof"):
             mesh = trimesh.load_mesh(
-                exported / f"piper_m2324-reference_{name}.stl", process=True
+                exported / f"piper_{profile_name}_{name}.stl", process=True
             )
             mesh.apply_transform(jaw)
             mesh.visual.face_colors = colors[name]
