@@ -1,0 +1,175 @@
+{
+  "status": "section_preservation_passed",
+  "units": "mm",
+  "previous": {
+    "volume_mm3": 22245.07830030995,
+    "face_count": 226,
+    "section_samples": [
+      {
+        "y_mm": -69.0,
+        "area_mm2": 725.3380557009633,
+        "Ixx_mm4": 45164.728021467105,
+        "Izz_mm4": 48721.47857021075,
+        "connected_faces": 1,
+        "inner_loops": 5
+      },
+      {
+        "y_mm": -60.0,
+        "area_mm2": 591.0637715561636,
+        "Ixx_mm4": 36435.80753643159,
+        "Izz_mm4": 45312.78683496639,
+        "connected_faces": 1,
+        "inner_loops": 4
+      },
+      {
+        "y_mm": -50.0,
+        "area_mm2": 219.69932042103994,
+        "Ixx_mm4": 6231.906702116597,
+        "Izz_mm4": 23557.487465572776,
+        "connected_faces": 1,
+        "inner_loops": 0
+      },
+      {
+        "y_mm": -35.0,
+        "area_mm2": 277.463754161466,
+        "Ixx_mm4": 6743.99472515838,
+        "Izz_mm4": 23394.391692275938,
+        "connected_faces": 1,
+        "inner_loops": 1
+      },
+      {
+        "y_mm": -15.0,
+        "area_mm2": 174.14901549698942,
+        "Ixx_mm4": 2091.3005927649647,
+        "Izz_mm4": 19399.45901721072,
+        "connected_faces": 2,
+        "inner_loops": 0
+      }
+    ],
+    "bounds_mm": [
+      [
+        -14.0000001,
+        -70.0,
+        3.9999999
+      ],
+      [
+        14.0000001,
+        3.2,
+        31.0000001
+      ]
+    ]
+  },
+  "simplified": {
+    "volume_mm3": 25772.859988733722,
+    "face_count": 120,
+    "section_samples": [
+      {
+        "y_mm": -69.0,
+        "area_mm2": 725.3380557009633,
+        "Ixx_mm4": 45164.728021467105,
+        "Izz_mm4": 48721.47857021075,
+        "connected_faces": 1,
+        "inner_loops": 5
+      },
+      {
+        "y_mm": -60.0,
+        "area_mm2": 591.0637715561801,
+        "Ixx_mm4": 36435.807536432054,
+        "Izz_mm4": 45312.78683496872,
+        "connected_faces": 1,
+        "inner_loops": 4
+      },
+      {
+        "y_mm": -50.0,
+        "area_mm2": 257.3333333333331,
+        "Ixx_mm4": 6345.340117778047,
+        "Izz_mm4": 24492.44444444438,
+        "connected_faces": 1,
+        "inner_loops": 0
+      },
+      {
+        "y_mm": -35.0,
+        "area_mm2": 410.66666666666663,
+        "Ixx_mm4": 7361.580246913596,
+        "Izz_mm4": 26830.222222222248,
+        "connected_faces": 1,
+        "inner_loops": 0
+      },
+      {
+        "y_mm": -15.0,
+        "area_mm2": 142.50260760576336,
+        "Ixx_mm4": 1482.3421638564323,
+        "Izz_mm4": 14311.903130026196,
+        "connected_faces": 1,
+        "inner_loops": 0
+      }
+    ],
+    "bounds_mm": [
+      [
+        -14.0000001,
+        -70.0,
+        3.9999999
+      ],
+      [
+        14.0000001,
+        3.2,
+        31.0000001
+      ]
+    ]
+  },
+  "root_boolean_difference_mm3": 0,
+  "outer_rail_difference_mm3": 0,
+  "unchanged_parameters": [
+    "mount_y",
+    "width",
+    "tip_y",
+    "flange_thickness",
+    "root_top_z",
+    "sensor_y_translation",
+    "sensor_rear_z",
+    "sensor_hole_x",
+    "sensor_hole_y",
+    "sensor_bore",
+    "plug_center_x",
+    "socket_mouth_native_y",
+    "straight_exit",
+    "cable_bend_radius",
+    "fixed_loom_x",
+    "rib_thickness",
+    "arm_flange_thickness"
+  ],
+  "section_ratios": [
+    {
+      "y_mm": -69.0,
+      "area_mm2": 1.0,
+      "Ixx_mm4": 1.0,
+      "Izz_mm4": 1.0
+    },
+    {
+      "y_mm": -60.0,
+      "area_mm2": 1.000000000000028,
+      "Ixx_mm4": 1.0000000000000129,
+      "Izz_mm4": 1.0000000000000513
+    },
+    {
+      "y_mm": -50.0,
+      "area_mm2": 1.1712978121196276,
+      "Ixx_mm4": 1.0182020400951963,
+      "Izz_mm4": 1.0396883148187157
+    },
+    {
+      "y_mm": -35.0,
+      "area_mm2": 1.480073200579868,
+      "Ixx_mm4": 1.0915756234878597,
+      "Izz_mm4": 1.1468655639838974
+    },
+    {
+      "y_mm": -15.0,
+      "area_mm2": 0.8182797198082745,
+      "Ixx_mm4": 0.7088135340202758,
+      "Izz_mm4": 0.737747538079749
+    }
+  ],
+  "enclosed_arm_core_removed": true,
+  "limits": "Geometric section checks only. No quantified PETG strength, stiffness, creep or fatigue claim."
+}

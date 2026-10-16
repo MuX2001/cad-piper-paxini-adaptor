@@ -1,0 +1,16 @@
+{
+  "snapshot": "revisions/before-printability-audit",
+  "reason": "Preserve immediate short-pad V2 before correcting measured rear-skin normal thickness 3.4277832373 mm to 3.5 mm. Focused snapshot of the affected editable geometry and native/print solid exports; earlier complete revisions remain preserved. Also preserves the coupon before increasing nonfunctional notch lands from 1.0 to 1.6 mm; all fit holes and the 3.6 mm test stack remain fixed.",
+  "units": "mm",
+  "date": "2026-10-16",
+  "files": {
+    "cad/source/v2_parameters.py": "6cd23e184411f88bff797cdd7e0758da9012ebf5437798cd3a6f8b3eb0f77548",
+    "cad/source/replacement_finger.py": "90dd3fc25d832740a95f4b27884586808f9ae361a484fd3ccb2693e96cdee327",
+    "cad/exported/replacement_finger.step": "33c7aceaff9fcedc0f754008d1343fcaca133bf38a4532f2d4e63d41a3244a7f",
+    "cad/exported/replacement_finger.stl": "e2b9ef4f8df23efa6b252e130ce379647386281901fc659d2ebc0e3d5fd1c34d",
+    "cad/exported/replacement_finger_print.stl": "ee281ce390de2208a06d174426e0ea85e95d590950b69b8d435cf1cddf5119d3",
+    "cad/exported/fastener_coupon.step": "c3514990f6bd526dfe393cc447baf7c59aea98aefb2d70bf6b9799685298038d",
+    "cad/exported/fastener_coupon.stl": "0baa7084480fcb9e9b10d561c8466d0781be1bc90ee1b91586cf5addfb80ef5b",
+    "cad/exported/fastener_coupon_print.stl": "0baa7084480fcb9e9b10d561c8466d0781be1bc90ee1b91586cf5addfb80ef5b"
+  }
+}

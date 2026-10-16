@@ -4,7 +4,7 @@ All dimensions are millimetres. “CAD verified” below means recovered from th
 
 ## Coordinates and conversion
 
-The native jaw frame is retained: X across the finger, Y along the finger toward the original tip at Y = 0, Z outward from the grasping region. Original carrier mating face: Y = −70. The retained block occupies X = ±8.5, Y = −76.5…−70, Z = 4…26.5. The corrected finger occupies X = ±14, Y = −70…3.2, Z = 4…26.5. Its flat sensor rails begin at Z = 9.2.
+The native jaw frame is retained: X across the finger, Y toward the original tip at Y = 0, Z outward from the grasping region. Original carrier mating face: Y = −70. The retained block occupies X = ±8.5, Y = −76.5…−70, Z = 4…26.5. The reinforced finger occupies X = ±14, Y = −70…3.2, Z = 4…31. Flat sensor seating strips remain at Z = 9.2; added depth is outward from the grasping gap.
 
 In the gripper-base frame, Z runs away from the actuator and Y is the opening axis. For total command `q` in mm:
 
@@ -36,21 +36,35 @@ Fitting circles to boundary loops on the actual front face at Y = −70 independ
 
 Circle-fit residuals are below 0.000001 mm, reflecting STL numeric precision, **not manufacturing accuracy**. A separate coincident interface and four matching holes make removal mechanically plausible in the CAD. The local assets do not prove how the real finger is retained or whether a specific hardware revision can be disassembled without disturbing the carriage. Verify before physical disassembly.
 
-Four 4.2 mm head-relief pockets open from the front of the 4 mm flange, so the full root bearing thickness remains. A 2.4 mm slim-driver path passes through the frame for the lower row. The central access hole is not used as an additional fastener or locating feature. No alignment pins or interference-fit keys are claimed.
+Four Ø4.2 head-access passages start at Y = −64, leaving the full **6 mm root bearing thickness**. M2×8 replaces the previous M2×6 candidate, retaining 2 mm nominal engagement. The reinforced root extends forward to Y ≈ −56 and has a rounded underside transition into the arm. A 20 × 13 mm nominal R3 service opening gives access to all four heads. The core has been filled; this opening remains for root screw, key and cable service. A Ø2.4 short L-key envelope can enter and turn 60° inward, sampled every 5°. Install root screws before sensors and harness. Long straight driver tunnels through the sensor rails are removed. The Ø4 central access passage reaches the service window; it remains access to the original feature, not another fastener or locating pin.
 
 ## M2324 installation
 
 The supplied STEP has six cylindrical mounting axes at X = ±8.75 and native Y = 3, 11.00025981292, 19.00051962584. The drawing rounds the row pitch to 8 mm and column pitch to 17.5 mm. The rear face is native Z = −2.15; the provided manual identifies six M1.6 holes to 2 mm depth (PDF p. 8). The exact cylinder axes are recovered again during validation.
 
-Printed holes are Ø1.8, with Ø3.2 rear head pockets 1.4 mm deep in 4 mm rails. M1.6×4 produces nominal penetration `4 − (4 − 1.4) = 1.4 mm`. Actual screw head dimensions, lead-in, bottoming, torque and allowable housing load remain to be checked. The frame bears against the rear mounting strips; nothing wraps around or presses on the active tactile surface. The window exposes the back connectors and avoids a solid backplate under the electronics. Removing the six sensor screws releases a module independently of the root attachment.
+The six screw-head seating surfaces are at **Z=12.8**, with the sensor plane unchanged at **Z=9.2**. The actual pass-through thickness is therefore **3.6 mm at every location**. This dimension is controlled independently of screw length in `sensor_plate_thickness`; selecting a longer screw does not raise the seat automatically. The rejected prior geometry had 6.6 / 10.6 / 14.6 mm stacks and is preserved for comparison.
+
+One **22 × 21.7 mm rounded rectangular access pocket, R2**, covers all six holes. Its continuous planar floor is **3.6 mm** above the sensor mounting strips, and **3.0 mm** over the shallow 0.6 mm electronics clearance. Six Ø2.1 bores have 0.15 × 45° mouth reliefs opening to Ø2.4; the minimum ISO Ø2.72/Ø2.4 bearing annulus remains fully supported. There are no individual pads, bosses, head counterbores or narrow driver channels. External bore-edge ligament is at least 3.548 mm. The common pocket retains 3 mm outer rails, a 2 mm distal wall and R0.4 floor transitions.
+
+| Positions | Candidate screw | Head seat Z | Seat-to-sensor stack | Nominal penetration |
+| --- | --- | ---: | ---: | ---: |
+| S1, S4 — distal | M1.6×5 | 12.8 mm | 3.6 mm | 1.4 mm |
+| S2, S5 — middle | M1.6×5 | 12.8 mm | 3.6 mm | 1.4 mm |
+| S3, S6 — proximal | M1.6×5 | 12.8 mm | 3.6 mm | 1.4 mm |
+
+Reference heads are Ø3 × 1.6 with 1.5 mm hex sockets; the insertion sweep also bounds Ø3.14 knurled heads. Hardware dimensions remain parameterized in `sensor_fasteners.py`. The [per-screw audit](sensor-screw-access.md) checks continuous insertion/removal and a catalog Ø3 / 60 mm / 1.5 mm hex driver on both complete attached-jaw models. Every reference geometry check passes, including head-width lateral paths into the common pocket. Driver radial clearance is **0.75 mm**, or **0.60 mm** with the declared 0.30 mm diametric undersize case. Conservative required blade reach beside each row is measured in the audit and remains within the 60 mm reference blade. These wall heights are not screw passage thicknesses.
+
+All six use **1.4 mm nominal penetration**, leaving **0.6 mm** to the manufacturer's 2 mm depth. The 4.76–5.24 mm screw-length bounds plus an assumed ±0.15 mm stack error give **1.01–1.79 mm penetration**, leaving **0.21 mm** minimum to nominal depth. Actual usable thread depth, print tolerance and torque remain unverified; measure protrusion and do not substitute 6 mm screws in this stack. Minimum nominal screw-to-finger free clearance is **0.1414 mm**, excluding intentional seat contact. **Physical hardware status remains UNVERIFIED for S1–S6.** The conservative sensor envelope still translates 12 mm toward the grasping gap without catching the holder.
 
 ## Functional reach and reinforcement
 
 Both original meshes independently give mounting Y = −70.000000298 and distal Y ≈ 0: **70.000 mm reach**. The stock distal flat contact region is Y = −10.022178…0, with area 229.624 mm² and area centroid Y = −5.210419. These are geometric measurements, not physical metrology.
 
-The sensor's three broad near-+Z crown faces have native Y = 1.602079903898…20.44664874099 and total area 318.942 mm². Selecting those faces excludes housing and peripheral bevels. After the stated transform, the tactile region spans jaw Y = **−18.844569…0**, or **51.155431…70.000 mm from the mount**. Its distal edge aligns with the stock tip and its longitudinal span covers the full stock distal pad. The sensor housing extends 2.395 mm and the holder 3.2 mm beyond the datum; neither is counted as tactile reach. The old V2 translation of −39 gave only 29.397920 mm broad-crown reach. No vendor geometry is scaled.
+The sensor's three broad near-+Z crown faces have native Y = 1.602079903898…20.44664874099 and total area 318.942 mm². Selecting those faces excludes housing and peripheral bevels. After the stated transform, the tactile region spans jaw Y = **−18.844569…0**, or **51.155431…70.000 mm from the mount**. Its distal edge aligns with the stock tip and its longitudinal span covers the full stock distal pad. The sensor housing extends 2.395 mm and the holder 3.2 mm beyond the datum; neither is counted as tactile reach. The early goal-01 V2 translation of −39 gave only 29.397920 mm broad-crown reach; goal-02 corrected this to 70 mm, which goal-03 preserves. No vendor geometry is scaled.
 
-The extended load path uses two **3 mm webs**, each with a **5 × 3 mm lower flange**. Web height tapers from Z = 26.5 at the root to 20 at the sensor-frame entrance, then to the 13.2 mm rail back. A curved **3 mm thick, 8 mm long cross brace** at Y = −46…−38 ties the beams and supports the cable saddle. Width remains 28 mm. Open bays avoid a solid backing block and give support-removal access. Geometry provides reinforcement; no stiffness, load or creep claim follows without material and force data.
+The primary arm is predominantly solid: the old enclosed mid-span core has been filled. Existing 5 mm web bands and 3.5 mm skin bands remain within the continuous material, with the same outer profile. Root Y≤−56 is unchanged by exact solid comparison; the local service opening retains 4 mm side walls and the root bearing stacks remain 6 mm. Outer transitions use R2.5 fillets and the root service opening R3 corners. The existing cable saddle is simplified from a segmented loft to one concentric circular section, 3 mm radial thickness, preserving tie locations and cable clearance.
+
+The [actual-section comparison](mechanical-comparison.md) uses the immediate previous reinforced V2. Root and arm area/inertia are unchanged or increased at the measured stations. The sensor section deliberately loses tall dividing walls in favor of a continuous low seating plate and retained outer rails; this local change is reported separately. No whole-part stiffness, strength, creep or fatigue rating is inferred.
 
 ## Motion and cable routing
 
@@ -72,4 +86,4 @@ Provisional fixed loom endpoints are base **(−55, 0, 44.681820)** and **(+55, 
 
 ## Print assumptions
 
-FDM tolerances are nominal clearance only: zero measured print compensation. Candidate PETG, six walls and 50% infill have not been load tested. Side printing places principal bending directions in layers but needs removable support under the opposite rail/window span and local horizontal holes. The fit gauge checks the root face and hole pattern only; it does not test sensor alignment, rib stiffness, travel or cable routing. The coupon's one/two/three edge notches identify +0/+0.1/+0.2 mm diameter lanes. No coupon result automatically changes the design.
+FDM tolerances are nominal clearance only: zero measured print compensation. The user P2S PETG evaluation baseline is 0.4 mm nozzle, 0.20 mm layers, 4–5 walls and 25–35% infill. Side printing keeps main Y–Z load paths in layers. No compatible slicer was found: common-pocket closure, accessible supports and retention of small openings after slicing are NOT VERIFIED. The enclosed arm core and isolated pad starts have been removed; see [printability acceptance](printability-acceptance.md). The 6 mm root gauge verifies only the contact face and pattern. The updated 3.6 mm coupon reproduces the actual short pass-through and 0.15 mm seat relief, with one/two/three notches for +0/+0.1/+0.2 mm diameter lanes. The coupon does not predict full-part stiffness or horizontal-hole fit. See [manufacturing notes](manufacturing.md); no automatic compensation or print release is implied.

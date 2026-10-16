@@ -13,16 +13,19 @@ sys.path.insert(0, str(V2 / "cad/source"))
 
 import numpy as np
 import trimesh
-from build123d import Pos, Rot, import_step
+from build123d import Plane, Pos, Rot, Solid, import_step
 from PIL import Image
+from OCP.BRepAdaptor import BRepAdaptor_Surface
+from OCP.GeomAbs import GeomAbs_Cylinder
 
-from build_v2 import (ROOT, assembly_meshes, check_preservation, local_meshes, sha)
+from build_v2 import (ROOT, assembly_meshes, check_preservation, local_meshes, sha, PREVIEW_NAMES)
 from references import (GRIPPER, carrier_and_finger, faceted_solid, jaw_matrix,
                         mating_holes, sensor_mounting_axes, vendor_mesh,
                         reach_measurements, connector_measurements)
 from replacement_finger import (P, bore, box_between, cable_envelope, hardware, jaw_location, make_coupon,
                                 make_finger, make_flange, placed_sensor, plug_envelope, print_location,
-                                moving_cable_path, service_cable_path, service_cable, strain_relief_band)
+                                moving_cable_path, service_cable_path, service_cable, strain_relief_band,
+                                root_key_envelope)
 
 
 def overlap(a, b):
@@ -44,6 +47,7 @@ def zero_overlap(a, b, name, results):
 
 def check_reach(finger):
     measured = reach_measurements()
+    previous = json.loads((V2/"revisions/goal-02/docs/validation.json").read_text())
     crown_native = measured["sensor_crown_native_y_mm"]
     crown_y = [P.sensor_y_translation - crown_native[1], P.sensor_y_translation - crown_native[0]]
     for stock in measured["stock"]:
@@ -53,9 +57,10 @@ def check_reach(finger):
     return {"measurement": measured, "original_reach_mm": measured["stock"][0]["reach_mm"],
             "corrected_tactile_reach_mm": crown_y[1] - P.mount_y,
             "corrected_tactile_contact_from_mount_mm": [v-P.mount_y for v in crown_y],
-            "previous_v2_tactile_reach_mm": -39-crown_native[0]-P.mount_y,
+            "previous_v2_tactile_reach_mm": previous["functional_reach"]["corrected_tactile_reach_mm"],
+            "early_goal01_tactile_reach_mm": -39-crown_native[0]-P.mount_y,
             "holder_length_mm": P.tip_y-P.mount_y, "holder_width_mm": P.width,
-            "reinforcement": "Two 3 mm webs with 5 x 3 mm lower flanges; curved 3 mm cross brace; open central bays",
+            "reinforcement": "Predominantly solid arm, preserved 5 mm web bands, 6 mm root seats, 27 mm root depth and radiused transitions",
             "load_or_deflection_tested": False}
 
 
@@ -126,10 +131,31 @@ def validate():
     for kind in ("source_sha256", "artifact_sha256"):
         for name, digest in manifest[kind].items():
             assert sha(V2 / name) == digest, f"Stale build: {name}; regenerate"
+    assert sha(V2/"docs/previous-revision.json") == manifest["previous_revision_manifest_sha256"]
+    assert sha(V2/"docs/pre-counterbore-revision.json") == manifest["pre_counterbore_manifest_sha256"]
+    assert sha(V2/"docs/pre-short-pad-revision.json") == manifest["pre_short_pad_manifest_sha256"]
+    assert sha(V2/"docs/pre-printability-revision.json") == manifest["pre_printability_manifest_sha256"]
 
+    assert sha(V2/'docs/pre-simplification-revision.json') == manifest['pre_simplification_manifest_sha256']
     finger, sensor = make_finger(), placed_sensor()
     screws = hardware()
     report["functional_reach"] = check_reach(finger)
+    mechanical = json.loads((V2/"docs/mechanical-comparison.json").read_text())
+    assert mechanical['status']=='section_preservation_passed'
+    assert abs(mechanical['simplified']['volume_mm3']-finger.volume)<.01
+    assert mechanical['root_boolean_difference_mm3']<1e-6
+    from compare_structure import section_properties
+    for stored in mechanical['simplified']['section_samples']:
+        measured = section_properties(finger,stored['y_mm'])
+        for key in ('area_mm2','Ixx_mm4','Izz_mm4'):
+            assert abs(measured[key]-stored[key])<.01
+    radii = {round(s.Cylinder().Radius(),6) for face in finger.faces()
+             if (s:=BRepAdaptor_Surface(face.wrapped)).GetType()==GeomAbs_Cylinder}
+    assert {P.sensor_access_radius,P.transition_fillet,P.service_window_radius}.issubset(radii)
+    report['mechanical_comparison'] = {'status':mechanical['status'],
+        'root_boolean_difference_mm3':mechanical['root_boolean_difference_mm3'],
+        'section_properties_rechecked':True,'fillet_radii_present_mm':[2,2.5,3],
+        'physical_strength_verified':False,'report':'docs/mechanical-comparison.json'}
     parts = {"replacement_finger": finger, "mount_fit_gauge": make_flange(), "fastener_coupon": make_coupon()}
     for name, part in parts.items():
         assert part.is_valid and len(part.solids()) == 1
@@ -197,24 +223,65 @@ def validate():
         zero_overlap(finger, screw, f"finger_vs_{name}", report["interference_mm3"])
     for x in P.mount_hole_x:
         for z in P.mount_hole_z:
-            tool = bore((x, P.flange_front_y + P.mount_head_height, z), (0, 1, 0),
-                        P.mount_driver_diameter, P.tip_y-P.flange_front_y+2)
-            zero_overlap(finger, tool, f"root_driver_{x}_{z}_vs_finger", report["interference_mm3"])
-            zero_overlap(sensor, tool, f"root_driver_{x}_{z}_vs_sensor", report["interference_mm3"])
+            # Full annular head seat for the entire 6 mm bearing thickness.
+            bearing = bore((x,P.mount_y,z),(0,1,0),P.mount_head_diameter,P.flange_thickness)
+            bearing -= bore((x,P.mount_y-.1,z),(0,1,0),P.mount_bore,P.flange_thickness+.2)
+            assert abs(bearing.volume-overlap(finger,bearing)) < .001
+            head_insertion = bore((x,P.flange_front_y,z),(0,1,0),P.mount_head_diameter,
+                                  P.root_head_access_end_y+1-P.flange_front_y)
+            zero_overlap(finger,head_insertion,f"root_head_insertion_{x}_{z}",report["interference_mm3"])
+            for angle in range(0,61,5):
+                tool = root_key_envelope(x,z,angle)
+                zero_overlap(finger,tool,f"root_L_key_{x}_{z}_{angle}_vs_finger",report["interference_mm3"])
+                zero_overlap(sensor,tool,f"root_L_key_{x}_{z}_{angle}_vs_sensor",report["interference_mm3"])
     for x, y in P.sensor_axes:
-        # Full 3 mm head-bearing annulus, 2.0 mm thick, under each sensor seat.
-        annulus = bore((x, y, P.sensor_screw_seat_z - 2), (0, 0, 1), 3.0, 2)
-        annulus -= bore((x, y, P.sensor_screw_seat_z - 2.1), (0, 0, 1), P.sensor_bore, 2.2)
+        # 3 mm head-bearing annulus, excluding the intentional bore-mouth
+        # chamfer that clears the catalog screw's maximum under-head blend.
+        annulus = bore((x, y, P.sensor_screw_seat_z(y) - 2), (0, 0, 1), 3.0, 2)
+        annulus -= bore((x, y, P.sensor_screw_seat_z(y) - 2.1), (0, 0, 1), P.sensor_bore, 2.2)
+        annulus -= Solid.make_cone(P.sensor_bore/2,P.sensor_bore/2+P.sensor_seat_chamfer,
+                                  P.sensor_seat_chamfer,
+                                  Plane(origin=(x,y,P.sensor_screw_seat_z(y)-P.sensor_seat_chamfer)))
         assert abs(annulus.volume - overlap(annulus, finger)) < .001
-        tool = bore((x, y, P.sensor_screw_seat_z + P.sensor_head_height), (0, 0, 1), 2.2, 30)
+        tool = bore((x, y, P.sensor_screw_seat_z(y) + P.sensor_head_height), (0, 0, 1), 3.0, 30)
         zero_overlap(finger, tool, f"sensor_driver_{x}_{y}_vs_finger", report["interference_mm3"])
-    report["fasteners"] = {"mount_candidate": "8 total M2 x 6; verify pitch/head and real carrier thread depth",
+    # Whole conservative sensor bounding box can translate toward the grasping
+    # gap without catching the new bosses or enclosure. Remove its screws first.
+    sb = sensor.bounding_box()
+    removal = box_between(sb.min.X,sb.max.X,sb.min.Y,sb.max.Y,sb.min.Z-12,sb.max.Z)
+    zero_overlap(finger,removal,"sensor_removal_12mm_bbox_vs_finger",report["interference_mm3"])
+    report["fasteners"] = {"mount_candidate": f"8 total M2 x {P.mount_screw_length:g}; verify pitch/head and real carrier thread depth",
                             "mount_nominal_penetration_mm": P.mount_screw_length - P.flange_thickness,
-                            "sensor_candidate": "12 total M1.6 x 4",
-                            "sensor_nominal_penetration_mm": P.sensor_screw_length - (P.rail_thickness - P.sensor_head_recess),
-                            "sensor_bearing_annuli_2mm_solid": True,
+                            "root_bearing_thickness_mm":P.flange_thickness,
+                            "root_bearing_annuli_complete":True,
+                            "root_tool_access":"Short L-key through service window; 0..60 degree inward swing sampled every 5 degrees; roots fitted before harness",
+                            "sensor_candidate": "Six M1.6 x 5 per finger; twelve total",
+                            "sensor_nominal_penetration_mm": P.sensor_thread_penetration,
+                            "sensor_bearing_annuli_supported_below_seat_relief": True,
+                            "sensor_seat_relief_45_deg_mm":P.sensor_seat_chamfer,
+                            "sensor_removal_clearance_translation_mm":12,
                             "thread_engagement_intersections_excluded": "Nominal threaded shafts intentionally enter pilot/minor-diameter material"}
+    from dataclasses import asdict
+    from sensor_fasteners import S
+    access = json.loads((V2/"docs/sensor-screw-access.json").read_text())
+    assert access["hardware"]==asdict(S)
+    assert access["status"]=="reference_geometry_passed_actual_hardware_unverified"
+    assert abs(access["finger_volume_mm3"]-finger.volume)<.01
+    assert len(access["screws"])==6
+    for row,(x,y) in zip(access["screws"],P.sensor_axes):
+        assert np.allclose(row["jaw_xy_mm"],(x,y),atol=1e-8)
+        assert row["reference_geometry_status"]=="PASS" and row["overall_status"]=="UNVERIFIED"
+        assert row["seating"]["after_overlap_mm3"]<1e-7
+        assert row["insertion"]["unexpected_sensor_overlap_mm3"]<1e-7
+        assert row["clearance_mm"]["minimum_free_surface"]>0
+    report["sensor_screw_access"]={"status":access["status"],"positions_checked":6,
+        "jaw_instances_checked":2,"report":"docs/sensor-screw-access.json",
+        "minimum_free_surface_clearance_mm":min(r["clearance_mm"]["minimum_free_surface"] for r in access["screws"]),
+        "actual_hardware_confirmed":False}
     report["cable"] = check_cable(finger,sensor,screws,report["interference_mm3"])
+    previous_validation = json.loads((V2/"revisions/goal-02/docs/validation.json").read_text())
+    assert abs(report["cable"]["full_box_withdrawal_vs_vendor_housing_mm3"]-
+               previous_validation["cable"]["full_box_withdrawal_vs_vendor_housing_mm3"]) < 1e-6
     print("70 mm tactile reach, interfaces, tool access, parallel exit and constant cable length pass", flush=True)
 
     base = vendor_mesh("gripper_base")
@@ -264,7 +331,7 @@ def validate():
         "range_mm":[0,100],"horizontal_loop_min_base_z_mm":horizontal_z_min,
         "horizontal_loop_above_base_mm":float(horizontal_z_min-base.bounds[1,2]),
         "fixed_descending_leg_outside_base_x_mm":float(fixed_x_clearance),
-        "minimum_loop_turn_beyond_rigid_finger_y_mm":P.loop_turn_u_closed-25-P.carrier_z_max,
+        "minimum_loop_turn_beyond_rigid_finger_y_mm":P.loop_turn_u_closed-25-P.root_top_z,
         "method":"Straight leg changes cancel (+q/4 and -q/4); fixed endpoints and tangent continuity checked at 101 openings. Loops stay above actuator; descending tails stay outside its X bounds. Outbound loops stay beyond their moving fingers; return legs are outside their X bounds.",
         "assumption":"Harness follows the modeled loops, with provisional fixed loom restraints at the recorded endpoints; no dynamic cable simulation or physical flex test."}
     for opening in (0, 50, 100):
@@ -314,6 +381,7 @@ def validate():
         with Image.open(path) as im:
             assert im.size == (1440, 1080)
             im.verify()
+    assert {p.name for p in (V2/'drawings').glob('*.png')}==PREVIEW_NAMES
     report["previews"] = {"png_count": len(list((V2 / "drawings").glob("*.png"))),
                            "automated_check": "Readable 1440 x 1080 PNGs; visual review is separate"}
     print("Motion: 0..100 mm analytic separation and five B-rep configurations pass", flush=True)
@@ -333,7 +401,14 @@ def validate():
                               "Parallel socket exit is CAD-derived; actual harness dimensions, minimum bend radius, fixed restraints and IN/OUT selection remain physically unverified",
                               "Full rectangular plug withdrawal envelope clips vendor sensor housing; actual stepped plug/latch access remains unverified although the printed holder and screws clear the corridor",
                               "Constant-length cable clearance envelope is geometric; no dynamic flex, strain or abrasion simulation",
+                              "Section measurements are geometric only; PETG properties, bolted-joint compliance, local stress, creep and fatigue remain unverified",
                               "No slicing, printing, strength, torque, load or powered motion tests; PRINT-HOLD remains"]
+    (V2 / "docs/validation.json").write_text(json.dumps(report, indent=2) + "\n")
+    from verify_printability import audit_printability
+    printability = audit_printability(report)
+    report["printability"] = {"report":"docs/printability-acceptance.json",
+                             "validation_level":printability["validation_level"],
+                             "checks":printability["checks"]}
     (V2 / "docs/validation.json").write_text(json.dumps(report, indent=2) + "\n")
     print(f"PASS: V2 geometry; both V1 regressions; {report['preservation']['pre_existing_files']} original files unchanged", flush=True)
     return report

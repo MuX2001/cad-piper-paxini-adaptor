@@ -13,8 +13,9 @@ def font(size):
         return ImageFont.load_default(size=size)
 
 
-def render(meshes, path, direction, title, subtitle="", labels=(), up_axis=(0, 0, 1)):
-    width, height = 1440, 1080
+def render(meshes, path, direction, title, subtitle="", labels=(), up_axis=(0, 0, 1),
+           image_size=(1440,1080), frame_points=None, show_footer=True):
+    width, height = image_size
     view = np.asarray(direction, dtype=float)
     view /= np.linalg.norm(view)
     up_axis = np.asarray(up_axis, dtype=float)
@@ -23,7 +24,7 @@ def render(meshes, path, direction, title, subtitle="", labels=(), up_axis=(0, 0
     right = np.cross(up_axis, view)
     right /= np.linalg.norm(right)
     up = np.cross(view, right)
-    points = np.vstack([m.vertices for m in meshes.values()])
+    points = np.vstack([m.vertices for m in meshes.values()]) if frame_points is None else np.asarray(frame_points)
     screen = np.column_stack((points @ right, points @ up))
     span = np.ptp(screen, axis=0)
     scale = min((width - 220) / max(span[0], 1), (height - 230) / max(span[1], 1))
@@ -76,7 +77,10 @@ def render(meshes, path, direction, title, subtitle="", labels=(), up_axis=(0, 0
         box = draw.textbbox((tx, ty), text, font=font(19))
         draw.rectangle((box[0] - 5, box[1] - 4, box[2] + 5, box[3] + 4), fill="#f5f7fa")
         draw.text((tx, ty), text, font=font(19), fill="#142c45")
-    draw.text((32, height - 40), "V2 / direct replacement   |   CAD review only; physical fit and cable checks pending", font=font(18), fill="#46576b")
-    path = Path(path)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    image.save(path)
+    if show_footer:
+        draw.text((32, height - 40), "V2 / direct replacement   |   CAD review only; physical fit and cable checks pending", font=font(18), fill="#46576b")
+    if path is not None:
+        path = Path(path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        image.save(path)
+    return image

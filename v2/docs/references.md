@@ -1,6 +1,6 @@
 # V2 reference provenance and conversions
 
-Read on 2026-10-16. Original assets and every pre-existing V1 file are protected by `preserved-state.json`, captured before V2 work. `reference-measurements.json` records the exact gripper and sensor hashes used; `build-manifest.json` records V2 source/output hashes and installed CAD package versions.
+Provenance and chronological modification history; later entries supersede earlier geometry descriptions. References read on 2026-10-16. Original assets and every pre-existing V1 file are protected by `preserved-state.json`, captured before V2 work. `reference-measurements.json` records the exact gripper and sensor hashes used; `build-manifest.json` records V2 source/output hashes and installed CAD package versions.
 
 | Supplier / asset | Source, revision, license | Native units / V2 treatment |
 | --- | --- | --- |
@@ -20,4 +20,72 @@ The full GLBs use metres and contain the untouched base mesh, two source-selecte
 
 The existing 232-file preservation baseline is unchanged. The user-created `docs/goal/goal-02.md` is separately hashed as a subsequent input. Revised V2 reach, cable path, frame reinforcement, previews, exports and checks are regenerated from the V2 sources only.
 
+## Goal-03 reinforcement and comparative calculations
+
+The complete previous V2 revision is preserved, byte-for-byte, as 47 files under `v2/revisions/goal-02/`, from Git commit `fe94d0548cd070a5a3ab135652aff9194e426492`. `previous-revision.json` records every snapshot hash. Goal-03 is an additional protected user input; the original 232 hashes and goal-02 hash are unchanged. Comparisons read the archived STEP, not a reconstructed approximation. The archive includes its original parametric source, exports, previews and validation records; historical scripts should be regenerated at the original project-root layout from that Git revision.
+
+The initial reinforced revision used authored geometry only: 6 mm root seats with M2×8 candidates, a deeper radiused collar, 5 mm webs, 3.5 mm skins, a filleted partial box, rounded service/cable openings and Ø6 sensor bosses. Carrier/sensor CAD, mounting axes, tactile pose, reach and cable route remain unmodified. STEP retains designed B-reps; GLB/STL are regenerated tessellations.
+
+The R3 service opening overlaps the rounded core entrance by 1 mm to avoid coincident surface seams. STL export removes collapsed zero-area UV-pole facets from authored rounded surfaces, and any duplicate facets, without moving vertices or filling holes. The per-file counts are recorded in `build-manifest.json`; nonzero-area degeneracies or an open mesh fail the build. Original vendor meshes and the previous V2 snapshot receive no cleanup.
+
+Assembly/preview tessellation clears the in-memory OpenCascade triangulation cache before using its fixed 0.04 mm / 0.15 rad settings. This prevents earlier STL meshing at 0.03 mm from changing assembly facet counts. It changes no analytic surfaces or source files.
+
+| Calculation reference | Provenance and use |
+| --- | --- |
+| [Bambu PETG HF TDS V1.0](https://store.bblcdn.com/3a230e260a3a47c2b0db0156e07eef91.pdf) | Manufacturer PDF, accessed 2026-10-16, no local copy or redistribution. Representative XY Young's modulus 1810 MPa, Z modulus 1540 MPa and density 1.28 g/cm³; actual filament/process unknown. Its 100% infill, annealed specimens are not this printed part. No strength rating inferred. |
+| [MIT Unified Engineering, Simple Beam Theory](https://ocw.mit.edu/courses/16-01-unified-engineering-i-ii-iii-iv-fall-2005-spring-2006/f66f80cd5fbd5cf8295d7b1e1e28a368_gm5_8_notes.pdf) | MIT OpenCourseWare course notes, 2005–2006, accessed 2026-10-16; no local copy. Moment-curvature and nominal bending stress basis for the comparative variable-section integration. No FEA model introduced. |
+| Supplied PaXini manual, PDF p. 5 | Preserved V1 `docs/design-rationale.md` records 25 N normal and ±10 N tangential measurement ranges. Used only as clearly labelled representative matched loads; not a gripper force specification or sensor structural limit. |
+
+`scripts/cad/compare_structure.py` intersects the actual solids with native X–Z planes, uses OpenCascade surface area/centroid/inertia properties and integrates beam compliance. The analytical rectangle check, 1/0.5 mm convergence comparison and section-area volume integral check are recorded. Independent-face calculations expose the sensitivity of open rails to lateral coupling; polar area moment is explicitly not torsional rigidity. Final JSON, CSV, comparison table and section previews are generated under V2.
+
 Hirose's public plug STEP download was unavailable (HTTP 403), so no new vendor file was saved. The maximal rectangular plug envelope fits while mated, but its 8 mm straight sweep clips 1.316 mm³ of the existing sensor housing; this is recorded, not hidden or resolved by moving the socket. Printed holder and screw clearance along that corridor is verified. Actual stepped plug shape and physical latch/removal clearance must be checked before fabrication.
+
+## Explicit M2324 screw and screwdriver access audit
+
+The user confirmed that no additional screw or screwdriver specification is available. Reference hardware is therefore modeled for a conditional geometry check; it is not claimed to be the actual supplied hardware or an approved procurement selection. The PaXini manual's six M1.6 tapped holes / 2 mm depth and original sensor STEP remain the sensor-interface authority. All six Ø1.25 minor-cylinder axes and extents are remeasured read-only.
+
+| Primary reference | Use and limits |
+| --- | --- |
+| [NBK SNS/SNSS miniature socket screws](https://www.nbk1560.com/images/en/product/miniaturescrew/SNS/SNS_1.pdf) | Accessed 2026-10-16; no local copy. M1.6×4, 0.35 pitch, Ø3 head, 1.6 head height and 1.5 hex size provide a real catalog size reference. Material/torque options do not establish an allowable sensor/PETG tightening torque. |
+| [NBK ISO 4762:2004 / JIS B 1176:2015 dimensional extract](https://www.nbk1560.com/images/en/product/technical_data/rokkaku_bolt_NBK/rokkaku_bolt_NBK_1.pdf) | Accessed 2026-10-16; no local copy. Applied bounds for under-head radius/diameter, plain and knurled heads, socket, bearing diameter and screw length. A maximum R0.2 blend revealed a seating clash; authored 0.15 × 45° reliefs correct it. |
+| [Wera 2054 Micro 05118066001 data sheet](https://hybris-media.wera.de/download/pdfgenerator-datasheets/en/05118066001.pdf), [manufacturer product table](https://www.wera.de/en-au/tools/2054-screwdriver-for-hexagon-socket-screws-for-electronic-applications) | Accessed 2026-10-16; PDF dated 26.03.2026; no local copy. 1.5 mm hex, Ø3 blade, 60 mm exposed blade. Product table labels 97 mm as handle length; PDF ambiguously calls it overall length. A conservative 97 mm handle length is used with an explicitly assumed Ø20 envelope; actual handle and reduced-tip transition are unverified. |
+
+`sensor_fasteners.py` authors the reference screw head, minimum hex socket, maximum under-head blend and conservative major-diameter thread envelope. No downloaded supplier screw/tool CAD, true mating thread helix, material certification or physical measurement is claimed. In the first access audit, the six small seat chamfers were the only finger geometry changes; the fit coupon reproduces them. Existing mounting planes, holes, sensor pose, structural webs/skins and V1 are retained. `verify_sensor_access.py` generates the per-screw report, close-up/section/complete-assembly views and STEP/GLB access studies. The normal build regenerates and hashes these alongside the affected part exports.
+
+
+## Shallow-counterbore revision of the same reinforced V2
+
+The immediate preceding reinforced/access revision is preserved byte-for-byte in `revisions/before-shallow-counterbores/`: 67 active files including sources, exports, drawings and audit records; SHA-256 values are in `pre-counterbore-revision.json`. It preserves the uncommitted state immediately before this update. The earlier goal-02 archive remains unchanged. No new design variant or milestone was introduced.
+
+Primary catalog references read 2026-10-16: Accu [SSCF-M1.6-8-A2](https://www.accu.co.uk/metric-cap-head-screws/3784-SSCF-M1-6-8-A2), [SSCF-M1.6-12-A2](https://www.accu.co.uk/metric-cap-head-screws/3786-SSCF-M1-6-12-A2) and [SSC-M1.6-16-A4](https://www.accu.co.uk/metric-cap-head-screws/3038-SSC-M1-6-16-A4). Manufacturer/supplier product pages, specification revisions shown on the pages; mm, no downloaded CAD or redistribution license inferred. They establish catalog examples of 8/12/16 mm fully threaded M1.6 socket caps, with Ø3 × 1.6 heads, 1.5 hex and 0.35 pitch. These are size references, not confirmed purchased hardware. The NBK ISO/JIS extract above supplies length tolerances ±0.29 mm for length8 and ±0.35 mm for lengths12/16, and the existing head/blend/socket bounds. Wera remains the parameterized practical driver reference; its actual tip and handle are unconfirmed.
+
+The authored change raises six Ø7.2 local pads, makes Ø4.2 × 2.0 mm counterbores and Ø2.1 shank holes, and retains 0.15 mm mouth reliefs. Seats are raised to Z15.8/19.8/23.8 so longer screws preserve 1.4 mm nominal penetration without thinning the reinforcement. The existing fit coupon now reproduces the shallow pocket. A uniform 0.15 mm radial hole-error case and ±0.15 mm stack-error case are design sensitivity assumptions, not material data or printer calibration. Source CAD is regenerated into STEP/STL/GLB with the established unit conversions. Exact boolean comparison proves all changes lie within the six pad zones; no vendor asset, V1 geometry, cable route or root interface was edited. Full details and per-screw results are in [sensor-screw-access.md](sensor-screw-access.md).
+
+
+## Short sensor flanges and open access — corrected seat location
+
+The previous shallow-counterbore solution retained long screw towers and did not meet the intended modification. Its 68 active files are preserved byte-for-byte under `revisions/before-short-sensor-pads/`, with hashes in `pre-short-pad-revision.json`. The comparison section imports the real archived S3 screw, finger and driver STEP solids at the same scale as the current part. No original sensor or PiPER asset was changed.
+
+The current V2 removes the six cylinders, fixes every head seat at Z=12.8 above the unchanged sensor plane Z=9.2, and creates short 6 × 6 mm rounded flanges with a 3.6 mm effective pass-through. Inward lips are 3.0 mm thick. Six 4.5 mm wide U pockets open into the existing central window; R0.4 floor transitions retain support. The existing main 5 mm webs, 3.5 mm skins, 6 mm root seat and original outer 3 mm rails are preserved. All modifications are confined to the sensor fastener region. The existing coupon is updated to the actual 3.6 mm pass-through.
+
+The [NBK SNS/SNSS catalog](https://www.nbk1560.com/images/en/product/miniaturescrew/SNS/SNS_1.pdf), rechecked 2026-10-16, lists M1.6×5, pitch0.35, headØ3 × 1.6 and hex1.5. The [NBK ISO/JIS extract](https://www.nbk1560.com/images/en/product/technical_data/rokkaku_bolt_NBK/rokkaku_bolt_NBK_1.pdf) gives length4.76–5.24 mm and the existing conservative head/blend/socket bounds. Reference **SNS/SNSS-M1.6-5** is used at all six locations; exact supplied stock is unconfirmed. Manufacturer PDFs, native mm, no local copies or vendor CAD modifications, no redistribution license inferred. The generic screw torque is not an allowable torque for the sensor or PETG flange.
+
+## PETG acceptance audit — 2026-10-16
+
+The user supplied the P2S/PETG evaluation baseline: 0.4 mm nozzle, 0.20 mm layers, 4–5 wall loops and 25–35% infill. It supersedes the earlier eight-wall/100% process suggestion. No new printer profile, material data or tolerances are inferred. No compatible slicer was found, no dependencies were installed and no physical print or robot motion was performed.
+
+Actual B-rep normal-thickness probes measured 3.427783 mm on the rear skin. Only the internal core roof moves inward by 0.073738 mm vertically, giving 3.5 mm normal thickness. Exact comparison with the preserved immediate-prior STEP confines 40.319 mm³ of added material to that roof and its existing R2 fillets; no finger material is removed. All sensor/root interfaces, outer profile and cable route remain unchanged. The coupon's 1 mm identification cuts are spaced at 2.6 mm to leave 1.6 mm solid lands; fit-hole geometry and test-stack thickness are unchanged. These are authored V2 changes, not vendor conversions. Eight affected editable/solid-export files and their hashes are retained in `pre-printability-revision.json`; earlier complete archives remain intact.
+
+The focused `verify_printability.py` audit checks every active native/print STL without repair. It adds explicit triangle intersection, edge-incidence and vertex-link checks and records numerical tolerances and analytic fixtures. The generated build-section drawing is derived from the CAD solid, labelled as CAD screening rather than slicer output. Three pad starts have no prior-section overlap near print Z19.9; bridge/support behavior remains unverified. [Acceptance evidence and exceptions](printability-acceptance.md) distinguish CAD, slicing and physical validation.
+
+The kernel produced an invalid direct boolean cut between the old and current STEP imports; its volume was rejected. The audit instead compares the archived STEP with the authoritative parametric solid and checks valid zero-volume differences between the current export and source in both directions. No fuzzy tolerance or geometry repair was applied. Open CASCADE describes nearly coincident imported geometry as a possible source of faulty boolean results in its [official Boolean Operations documentation](https://github.com/Open-Cascade-SAS/OCCT/wiki/boolean_operations/efd8ae1c725be3a0cb1f7e14e4a26c838fd28a1b); this is a numerical comparison limitation, not evidence of STL self-intersection. Vendor assets remain untouched.
+
+The Wera reference envelope and source remain as above. The radial error case stays0.15 mm; assumed stack error stays±0.15 mm. They are explicitly unverified process bounds. The resulting nominal penetration is1.4 mm and the combined length/stack case retains0.21 mm margin to nominal2 mm depth. The source and complete assembly exports are regenerated; no separate variant, mounting plate or additional joint was necessary for direct access.
+
+## Geometry simplification of existing reinforced V2 — 2026-10-16
+
+The complete immediate previous state is archived as 74 files in `revisions/before-geometry-simplification/`, including all 24 previews. `pre-simplification-revision.json` records hashes. Earlier archives and all V1/vendor files are preserved. No design variant or milestone is added.
+
+The authored V2 replaces six individual U pockets and separate short flanges with one 22 × 21.7 mm R2 common pocket and a continuous flat plate. Six Ø2.1 bores, 0.15 mm mouth reliefs, Z=12.8 seats and 3.6 mm screw stacks remain. The former central sensor window becomes a shallow 0.6 mm underside relief with a 3 mm continuous floor. The enclosed arm core is filled; root geometry and outside bounds remain unchanged. The cable saddle becomes a single concentric circular section instead of a nine-section loft, preserving cable centerline, tie positions and clearance. CAD faces decrease from 226 to 120; source volume increases from 22245.073 to 25772.860 mm³.
+
+No new hardware or material specification is invented. The prior catalog M1.6×5 and Wera reference envelopes, parameterized uncertainties, sensor specifications and original CAD remain the basis of verification. The current section comparison reports measured geometry only; earlier beam calculations are historical. The current renderer produces exactly five requested final PNGs. Source STEP/STL/GLB exports are regenerated with unchanged units and vendor models. Mesh, six-screw, full-travel and reference-preservation results are recorded in the current acceptance report. Slicing and physical fit remain unverified.

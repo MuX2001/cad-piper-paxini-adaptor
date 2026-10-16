@@ -1,30 +1,28 @@
-# V2 reach and cable correction audit — 2026-10-16
+# Simplified reinforced V2 — validation result
 
-The existing V2 now places the broad M2324 tactile crown at the original **70.000 mm fingertip reach**, and routes leads parallel to the module before a broad remote bend. This regenerated digital design remains subject to the existing physical print hold. V1 and original vendor assets remain untouched.
+**CAD VALIDATED for the supplied/reference geometry. Slicing NOT VERIFIED; physical validation pending; not print-ready.** The [full acceptance table](printability-acceptance.md) separates these levels and records the user PETG/P2S baseline. The existing [PRINT-HOLD](../../PRINT-HOLD.md) remains unchanged.
 
-[Machine evidence](validation.json) is tied to [source/export hashes](build-manifest.json). The build command in [README](../README.md) regenerates STEP/STL/GLB exports and 15 PNG previews, then runs the geometric checks and both original validators. Exact CAD measurements are in [reference-measurements.json](reference-measurements.json).
+The current V2 has one **22 × 21.7 mm R2 common access pocket**, a continuous **3.6 mm screw-bearing plate** and six Ø2.1 holes. The underside electronics clearance is 0.6 mm deep, leaving 3.0 mm central material. No sensor screw bosses, individual U pockets, head counterbores or enclosed arm core remain. A single circular cable-saddle section replaces the segmented loft. The root service opening, root screw/head passages, central linkage access, shallow electronics clearance, rear cable channel and tie slots remain functional.
 
-Final regeneration and validation completed with **exit code 0**. All 15 previews were visually reviewed. Source/artifact hashes and local documentation links pass the final audit; tracked Git diff is empty. The main STL volume differs from its solid by approximately **0.0032%**.
+The final finger is **28 × 73.2 × 27 mm**; functional tactile reach remains **70 mm**. CAD faces reduce **226 → 120**, finger STL triangles **25,536 → 12,508**, and solid CAD volume increases **22,245.073 → 25,772.860 mm³**. These volumes are geometry, not slicer material estimates. The part is one valid connected solid.
 
-| Goal requirement | Evidence and limits |
-| --- | --- |
-| Preserve V1; update existing V2 | 232 original file hashes preserved; user-supplied goal-02 separately protected. No authored files outside V2, no V3; both legacy clamp validators run read-only. |
-| Derive reach from original CAD | Both stock fingers measure 70.000 mm from carrier mating plane to distal edge. Distal flat contact band: 59.978–70.000 mm from mount. |
-| Move tactile contact to original tip | Three broad sensor crown faces span 51.155–70.000 mm from mount. Distal edge aligns at stock Y = 0; previous V2 reached only 29.398 mm. Housing/holder overhang is excluded from this reach. |
-| Reinforce without a large solid holder | Two 3 mm webs with 5 × 3 mm lower flanges and 3 mm curved cross brace; open bays; width 28 mm. Main solid volume approximately 8,729.932 mm³. No strength or deflection rating without material/load evidence. |
-| Opposing faces and useful opening | Actual sensor normals map to base +Y/−Y. Conservative opposed gap is command + 1.994608484 mm over command 0–100 mm. |
-| Correct parallel cable exit | Proximal socket mouths measured at native X ±3.6, Y 18.520260 with +Y exit normal. Selected left port maps to jaw −Y. Straight 12 mm lead run precedes an R38 mm centreline sweep. |
-| Strain relief and service access | Open saddle with two 1.6 × 3.6 mm slots and releasable tie away from plug. Six sensor screw/tool paths clear; holder and screws clear 8 mm straight plug-withdrawal corridor. Real plug/latch access is unverified, as detailed below. |
-| Travel and cable slack | 71.690 mm moving path plus 219.309 mm service path; 290.999 mm combined per side. Fixed endpoints, continuity and constant length checked at 101 positions. R25.7 U-turn translates 25 mm for 50 mm jaw travel; R25 fixed-end turn. |
-| Full motion | Continuous pure-translation separation for rigid parts. Five configurations at 0/25/50/75/100 check service loops against both jaws, carriers, sensors, screws, ties and conservative actuator box. Loops above base; descending tails outside its X bounds. Assumes harness follows proposed route. |
-| Cable space and bend assumptions | Full-open cable region X ±57.6, Y ±138.3 mm; provisional fixed loom ends (±55, 0, 44.682) mm. Minimum inner envelope radius 23.1 mm. Manufacturer minimum radius and actual harness/sleeve dimensions unknown. |
-| Mounting and fasteners | Both 504-triangle carriers and four-hole 12 × 8 pattern retained; six sensor axes match STEP. Candidate root/sensor penetration 2.0/1.4 mm; sensor bearing annuli and tool paths checked. Real threads/depth unverified. |
-| Printable solids | Finger, gauge and coupon each reimport as one valid STEP solid and watertight STL body. Proper print transforms and bed Z = 0 checked. Main print envelope 22.5 × 73.2 × 28 mm; accessible supports required. |
-| Complete assemblies | Full GLBs at 0/50/100 contain 35 named components, including unchanged actuator mesh and cable route; vertices, triangles and poses checked after reimport. Six-solid finger/sensor/carrier STEP and eight-solid cable STEP verified separately. |
-| Requested previews | Common-datum side comparison, rear cable route, side exit, open/closed and isometric assembly, service loops and print orientation rendered from the same geometry. |
+Exact comparisons preserve the root region Y≤−56 and continuous outer sensor rails. The PiPER and sensor patterns, sensor plane/orientation, mating geometry, connector pose and cable centerline are unchanged. Root seats measure 6.000 mm, preserved outer web bands 5.000 mm, and sampled solid middle-arm depth at least 13.711 mm normal to the outer slope. Root/arm sections retain or increase area and bending moments. The sensor section deliberately replaces tall dividers with the continuous low plate; local clamping strength is untested. Interface-specific thickness exceptions are documented in the acceptance table.
 
-Key views: [reach comparison](../drawings/reach_comparison.png), [rear cable route](../drawings/cable_routing.png), [side exit](../drawings/cable_exit_side.png), [closed](../drawings/assembly_open0.png), [open](../drawings/assembly_open100.png), [isometric](../drawings/assembly_open50.png), [print orientation](../drawings/print_orientation.png).
+| Screw | Insert / seat | Tighten / remove | Minimum free screw clearance | Driver radial clearance | Actual hardware |
+| --- | --- | --- | ---: | ---: | --- |
+| S1 | PASS | PASS | 0.1414 mm | 0.750 mm | UNVERIFIED |
+| S2 | PASS | PASS | 0.1414 mm | 0.750 mm | UNVERIFIED |
+| S3 | PASS | PASS | 0.1414 mm | 0.750 mm | UNVERIFIED |
+| S4 | PASS | PASS | 0.1414 mm | 0.750 mm | UNVERIFIED |
+| S5 | PASS | PASS | 0.1414 mm | 0.750 mm | UNVERIFIED |
+| S6 | PASS | PASS | 0.1414 mm | 0.750 mm | UNVERIFIED |
 
-The conservative rectangular plug is clear while mated. During straight withdrawal its maximal box clips **1.315747 mm³ of the vendor sensor housing**; printed holder and screws remain clear. The actual stepped plug was not supplied and its public download returned HTTP 403. This is an unresolved plug-shape/latch check, not verified physical unmating. No sensor or connector CAD is moved to hide the uncertainty.
+All use reference **M1.6×5**, head Ø3 × 1.6, hex 1.5, at seat Z=12.8 above the sensor Z=9.2 plane. Nominal penetration is 1.4 mm with 0.6 mm remaining to the specified 2 mm depth. Length limits and assumed ±0.15 mm stack error leave 0.21 mm minimum margin. Driver clearance remains 0.60 mm under the stated radial undersize case. Actual screws, driver tip/handle, usable fully formed threads, print accuracy and torque remain unverified. The minimum free clearance excludes intended bearing/thread contacts. [Per-screw evidence](sensor-screw-access.md).
 
-The [physical checklist](../measurements/fit-checklist.md) records remaining thread, screw, harness, bend-radius, fixed-restraint, print-compensation and load checks. Cable envelopes are not dynamic flex/fatigue simulations. No slicing, full printing, force/torque test or powered gripper command was performed. [PRINT-HOLD.md](../../PRINT-HOLD.md) remains in force.
+Continuous axial access sweeps include the finger, both retained PiPER blocks, complete actuator bounding envelope, sensor housings, opposite jaw, installed screws and cable envelopes. Five complete motion configurations and continuous separation arguments preserve the full 0–100 mm opening range. The conservative minimum sensor-envelope gap is 1.994608 mm at zero command. No robot motion was performed. The reference cable route clears the new part; the existing uncertainty about actual plug-latch withdrawal through the sensor housing remains recorded.
+
+All six active STL files pass explicit edge/vertex manifold, connected-body, winding, degenerate/duplicate-face and self-intersection checks, with zero improper triangle intersections. Native and print placements are checked separately; STEP/source equality is verified by valid cuts in both directions. The common pocket is open and the enclosed arm core is gone. Its 17.7 mm straight closure span still requires accessible support or slicer bridge validation in the side-down orientation; actual supports and post-slice opening retention are NOT VERIFIED.
+
+Exactly five final previews are in [drawings](../drawings): [part](../drawings/replacement_finger.png), [mount and section](../drawings/sensor_mount.png), [closed/open assembly](../drawings/assembly.png), [cable routing](../drawings/cable_routing.png), [print orientation](../drawings/print_orientation.png). All previous previews are preserved with the complete 74-file pre-simplification V2 snapshot. V1's 232 protected files and two user inputs, plus every prior archive, are unchanged; both legacy validators pass read-only.
+
+[Print STL](../cad/exported/replacement_finger_print.stl) · [STEP](../cad/exported/replacement_finger.step) · [Machine assembly evidence](validation.json) · [Mesh and manufacturing evidence](printability-acceptance.json) · [Section comparison](mechanical-comparison.md) · [Build manifest](build-manifest.json).

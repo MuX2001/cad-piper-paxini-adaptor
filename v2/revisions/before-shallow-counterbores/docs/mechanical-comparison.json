@@ -1,0 +1,330 @@
+{
+  "status": "comparative_calculation_passed",
+  "physical_strength_verified": false,
+  "baseline_commit": "fe94d0548cd070a5a3ab135652aff9194e426492",
+  "baseline_step_sha256": "d1c639f9f0d3b2b2360e6ebb73aec00aba677dad41c88d3110e23551e19961c6",
+  "material": {
+    "reference": "Bambu PETG HF TDS V1.0; actual filament grade/process unverified",
+    "source": "https://store.bblcdn.com/3a230e260a3a47c2b0db0156e07eef91.pdf",
+    "youngs_xy_mpa": 1810.0,
+    "youngs_z_mpa": 1540,
+    "density_g_per_cm3": 1.28,
+    "reference_test_infill_percent": 100,
+    "reference_samples_annealed": true,
+    "actual_effective_modulus_mpa": null
+  },
+  "method": {
+    "source": "https://ocw.mit.edu/courses/16-01-unified-engineering-i-ii-iii-iv-fall-2005-spring-2006/f66f80cd5fbd5cf8295d7b1e1e28a368_gm5_8_notes.pdf",
+    "description": "Euler-Bernoulli variable-section beam; exact planar B-rep area properties, including holes; covariance inversion includes unsymmetrical sections; midpoint integration",
+    "root_y_mm": -70.0,
+    "point_load_y_mm": 0,
+    "loads_n": {
+      "grip": 25.0,
+      "lateral": 10.0
+    },
+    "load_basis": "Representative values from supplied M2324 measurement ranges (25 N normal / 10 N tangential), NOT an allowable force or actual robot operating force",
+    "tip_deflection_formula": "delta = F/E * integral((0-y)^2 / I_effective(y) dy)",
+    "stress_formula": "sigma_y = [x-cx,z-cz] @ inverse(area covariance) @ [Mz,Mx]; bounding-corner envelope",
+    "coupling_sensitivity": "Independent-face alternative omits parallel-axis coupling between disconnected section faces; a frame-model sensitivity, not a rigorous bound",
+    "limits": [
+      "Ideal root clamp; excludes screw/contact compliance and sensor housing flexibility",
+      "Homogeneous solid-equivalent modulus; excludes shear deformation, FDM defects, creep and delamination",
+      "Beam nominal stress only; no local notch stress, fatigue life, safety factor or strength rating",
+      "Polar area moment is NOT Saint-Venant torsional rigidity; full torsional deflection unverified"
+    ]
+  },
+  "torsion": {
+    "section_y_mm": -35,
+    "previous_connected_faces": 2,
+    "reinforced_connected_faces": 1,
+    "reinforced_closed_cell_count": 1,
+    "twist_degrees": null,
+    "assessment": "Closed mid-span cell couples the webs and provides a shear-flow path; the necessary root service opening and sensor window remain locally open and can govern twist/warping."
+  },
+  "root_bolt_group": {
+    "normal_load_moment_nmm": 1750.0,
+    "elastic_bolt_only_peak_axial_n": 109.375,
+    "equal_transverse_shear_per_screw_n": 6.25,
+    "interpretation": "Unchanged four-bolt 12 x 8 pattern; illustrative elastic bolt-only moment sharing, no preload/friction/contact model. Real engagement, preload, plastic bearing and cyclic loads require verification."
+  },
+  "previous": {
+    "volume_mm3": 8729.931807941372,
+    "solid_material_mass_g": 11.174312714164957,
+    "bounds_mm": [
+      [
+        -14.0,
+        -70.0,
+        4.0
+      ],
+      [
+        14.0,
+        3.2000000000000597,
+        26.5
+      ]
+    ],
+    "section_samples": [
+      {
+        "y_mm": -69.0,
+        "area_mm2": 599.3380557009634,
+        "centroid_x_mm": -3.3788056300677694e-16,
+        "centroid_z_mm": 15.312901248276294,
+        "Ixx_mm4": 26154.04638718115,
+        "Izz_mm4": 40489.47857021075,
+        "product_xz_mm4": -7.276417873540322e-14,
+        "polar_area_moment_mm4": 66643.5249573919,
+        "effective_I_grip_mm4": 26154.04638718115,
+        "effective_I_lateral_mm4": 40489.47857021075,
+        "independent_faces_I_grip_mm4": 26154.04638718115,
+        "independent_faces_I_lateral_mm4": 40489.47857021075,
+        "nominal_normal_stress_mpa": 0.7461466713174199,
+        "nominal_lateral_stress_mpa": 0.23858049896219546,
+        "connected_faces": 1,
+        "inner_loops": 5
+      },
+      {
+        "y_mm": -60.0,
+        "area_mm2": 93.36144578313429,
+        "centroid_x_mm": 0.0,
+        "centroid_z_mm": 18.101452266674272,
+        "Ixx_mm4": 1547.284137837065,
+        "Izz_mm4": 13977.746987952152,
+        "product_xz_mm4": 3.637978807091713e-12,
+        "polar_area_moment_mm4": 15525.031125789217,
+        "effective_I_grip_mm4": 1547.2841378370651,
+        "effective_I_lateral_mm4": 13977.746987952154,
+        "independent_faces_I_grip_mm4": 1547.2841378370067,
+        "independent_faces_I_lateral_mm4": 130.38113079493633,
+        "nominal_normal_stress_mpa": 7.2308522863887426,
+        "nominal_lateral_stress_mpa": 0.6009552188375012,
+        "connected_faces": 2,
+        "inner_loops": 0
+      },
+      {
+        "y_mm": -50.0,
+        "area_mm2": 83.96385542169142,
+        "centroid_x_mm": -6.769986749098583e-16,
+        "centroid_z_mm": 17.354284551032737,
+        "Ixx_mm4": 1079.691502552916,
+        "Izz_mm4": 12502.325301205623,
+        "product_xz_mm4": -2.6515019413277097e-12,
+        "polar_area_moment_mm4": 13582.016803758539,
+        "effective_I_grip_mm4": 1079.691502552916,
+        "effective_I_lateral_mm4": 12502.325301205625,
+        "independent_faces_I_grip_mm4": 1079.6915025528579,
+        "independent_faces_I_lateral_mm4": 122.25399358951836,
+        "nominal_normal_stress_mpa": 7.687023720297698,
+        "nominal_lateral_stress_mpa": 0.5598958458811646,
+        "connected_faces": 2,
+        "inner_loops": 0
+      },
+      {
+        "y_mm": -35.0,
+        "area_mm2": 69.86746987952714,
+        "centroid_x_mm": -8.135891990768155e-16,
+        "centroid_z_mm": 16.25167353324386,
+        "Ixx_mm4": 567.2614280773996,
+        "Izz_mm4": 10289.1927710858,
+        "product_xz_mm4": 1.4305984066360224e-14,
+        "polar_area_moment_mm4": 10856.4541991632,
+        "effective_I_grip_mm4": 567.2614280773996,
+        "effective_I_lateral_mm4": 10289.1927710858,
+        "independent_faces_I_grip_mm4": 567.2614280773705,
+        "independent_faces_I_lateral_mm4": 109.51907111114996,
+        "nominal_normal_stress_mpa": 8.31854846627344,
+        "nominal_lateral_stress_mpa": 0.476227835265148,
+        "connected_faces": 2,
+        "inner_loops": 0
+      },
+      {
+        "y_mm": -15.0,
+        "area_mm2": 82.44709576759281,
+        "centroid_x_mm": -4.136719553181733e-14,
+        "centroid_z_mm": 12.576422312183379,
+        "Ixx_mm4": 443.57947070399314,
+        "Izz_mm4": 10593.344445021452,
+        "product_xz_mm4": 4.6944330012481044e-12,
+        "polar_area_moment_mm4": 11036.923915725445,
+        "effective_I_grip_mm4": 443.57947070399314,
+        "effective_I_lateral_mm4": 10593.344445021452,
+        "independent_faces_I_grip_mm4": 443.5794707039822,
+        "independent_faces_I_lateral_mm4": 315.3044731095397,
+        "nominal_normal_stress_mpa": 4.304285979328532,
+        "nominal_lateral_stress_mpa": 0.1982376775246789,
+        "connected_faces": 2,
+        "inner_loops": 0
+      }
+    ],
+    "integration_step_mm": 0.5,
+    "coarse_fine_relative_change": {
+      "grip": 0.008218103394376008,
+      "lateral": 0.002039696352983178,
+      "grip_independent_faces": 0.0014210644913810189,
+      "lateral_independent_faces": 0.00599184974779432
+    },
+    "section_integral_volume_mm3": 8719.522243754365,
+    "section_volume_relative_error": 0.0011923992553455331,
+    "nominal_root_normal_stress_mpa": 7.445946880118185,
+    "nominal_max_normal_stress_mpa": 8.49073661759415,
+    "nominal_max_lateral_stress_mpa": 0.6208639509819618,
+    "nominal_peak_normal_y_mm": -26.25,
+    "grip": {
+      "load_n": 25.0,
+      "tip_deflection_mm": 1.2043226460722039,
+      "tip_stiffness_n_per_mm": 20.758556755148117,
+      "equivalent_I_mm4": 1311.2679497266674,
+      "half_modulus_tip_deflection_mm": 2.4086452921444077,
+      "independent_faces_tip_deflection_mm": 1.2116049895331171
+    },
+    "lateral": {
+      "load_n": 10.0,
+      "tip_deflection_mm": 0.04216898938457396,
+      "tip_stiffness_n_per_mm": 237.1410874659981,
+      "equivalent_I_mm4": 14979.63038689454,
+      "half_modulus_tip_deflection_mm": 0.08433797876914792,
+      "independent_faces_tip_deflection_mm": 3.5728336627440487
+    }
+  },
+  "reinforced": {
+    "volume_mm3": 22486.374477553305,
+    "solid_material_mass_g": 28.78255933126823,
+    "bounds_mm": [
+      [
+        -14.0000001,
+        -70.0,
+        3.9999999
+      ],
+      [
+        14.0000001,
+        3.2,
+        31.0000001
+      ]
+    ],
+    "section_samples": [
+      {
+        "y_mm": -69.0,
+        "area_mm2": 725.3380557009633,
+        "centroid_x_mm": 1.2083561365660026e-15,
+        "centroid_z_mm": 17.647087948408835,
+        "Ixx_mm4": 45164.728021467105,
+        "Izz_mm4": 48721.47857021075,
+        "product_xz_mm4": 8.602376263567844e-14,
+        "polar_area_moment_mm4": 93886.20659167785,
+        "effective_I_grip_mm4": 45164.728021467105,
+        "effective_I_lateral_mm4": 48721.47857021075,
+        "independent_faces_I_grip_mm4": 45164.728021467105,
+        "independent_faces_I_lateral_mm4": 48721.47857021075,
+        "nominal_normal_stress_mpa": 0.5212303437278739,
+        "nominal_lateral_stress_mpa": 0.1982698449120202,
+        "connected_faces": 1,
+        "inner_loops": 5
+      },
+      {
+        "y_mm": -60.0,
+        "area_mm2": 591.0637715561801,
+        "centroid_x_mm": 0.5689554038097491,
+        "centroid_z_mm": 16.49546087593544,
+        "Ixx_mm4": 36435.807536432054,
+        "Izz_mm4": 45312.78683496872,
+        "product_xz_mm4": 3125.3319314731916,
+        "polar_area_moment_mm4": 81748.59437140077,
+        "effective_I_grip_mm4": 36220.24587350763,
+        "effective_I_lateral_mm4": 45044.70715340494,
+        "independent_faces_I_grip_mm4": 36220.24587350763,
+        "independent_faces_I_lateral_mm4": 45044.70715340494,
+        "nominal_normal_stress_mpa": 0.6422952684649813,
+        "nominal_lateral_stress_mpa": 0.21063210351272005,
+        "connected_faces": 1,
+        "inner_loops": 4
+      },
+      {
+        "y_mm": -50.0,
+        "area_mm2": 218.37203227675266,
+        "centroid_x_mm": 3.4608670375891156e-15,
+        "centroid_z_mm": 23.29438398493591,
+        "Ixx_mm4": 6221.210483012139,
+        "Izz_mm4": 23521.650685675326,
+        "product_xz_mm4": -2.261459941826911e-12,
+        "polar_area_moment_mm4": 29742.861168687465,
+        "effective_I_grip_mm4": 6221.210483012139,
+        "effective_I_lateral_mm4": 23521.650685675326,
+        "independent_faces_I_grip_mm4": 6221.210483012139,
+        "independent_faces_I_lateral_mm4": 23521.650685675326,
+        "nominal_normal_stress_mpa": 2.2693300636139786,
+        "nominal_lateral_stress_mpa": 0.29759816152116403,
+        "connected_faces": 1,
+        "inner_loops": 0
+      },
+      {
+        "y_mm": -35.0,
+        "area_mm2": 276.1364660171923,
+        "centroid_x_mm": 1.2674997456721432e-15,
+        "centroid_z_mm": 19.333717180729074,
+        "Ixx_mm4": 6725.817914186511,
+        "Izz_mm4": 23358.554912379826,
+        "product_xz_mm4": -1.859810733981088e-13,
+        "polar_area_moment_mm4": 30084.372826566338,
+        "effective_I_grip_mm4": 6725.817914186511,
+        "effective_I_lateral_mm4": 23358.554912379826,
+        "independent_faces_I_grip_mm4": 6725.817914186511,
+        "independent_faces_I_lateral_mm4": 23358.554912379826,
+        "nominal_normal_stress_mpa": 0.9540850815486398,
+        "nominal_lateral_stress_mpa": 0.20977325088732457,
+        "connected_faces": 1,
+        "inner_loops": 1
+      },
+      {
+        "y_mm": -15.0,
+        "area_mm2": 167.65621762120162,
+        "centroid_x_mm": 4.068569815113352e-15,
+        "centroid_z_mm": 15.160607230283224,
+        "Ixx_mm4": 1990.7646415734343,
+        "Izz_mm4": 19135.16449720411,
+        "product_xz_mm4": -3.065411349518779e-12,
+        "polar_area_moment_mm4": 21125.929138777545,
+        "effective_I_grip_mm4": 1990.7646415734346,
+        "effective_I_lateral_mm4": 19135.16449720411,
+        "independent_faces_I_grip_mm4": 1990.7646415734125,
+        "independent_faces_I_lateral_mm4": 688.838409994285,
+        "nominal_normal_stress_mpa": 1.1261467982975792,
+        "nominal_lateral_stress_mpa": 0.10974559431181469,
+        "connected_faces": 2,
+        "inner_loops": 0
+      }
+    ],
+    "integration_step_mm": 0.5,
+    "coarse_fine_relative_change": {
+      "grip": 0.00020847978644433773,
+      "lateral": 6.478689899203083e-05,
+      "grip_independent_faces": 0.0003151849120343053,
+      "lateral_independent_faces": 0.02695167321729519
+    },
+    "section_integral_volume_mm3": 22471.54691912598,
+    "section_volume_relative_error": 0.0006594019165750975,
+    "nominal_root_normal_stress_mpa": 1.3030652995839267,
+    "nominal_max_normal_stress_mpa": 2.287328596439048,
+    "nominal_max_lateral_stress_mpa": 0.2991595775527459,
+    "nominal_peak_normal_y_mm": -47.25,
+    "grip": {
+      "load_n": 25.0,
+      "tip_deflection_mm": 0.13488465946120515,
+      "tip_stiffness_n_per_mm": 185.34353795207062,
+      "equivalent_I_mm4": 11707.704146880336,
+      "half_modulus_tip_deflection_mm": 0.2697693189224103,
+      "independent_faces_tip_deflection_mm": 0.13683185922111207
+    },
+    "lateral": {
+      "load_n": 10.0,
+      "tip_deflection_mm": 0.019021230125591728,
+      "tip_stiffness_n_per_mm": 525.7283537380531,
+      "equivalent_I_mm4": 33208.991773877024,
+      "half_modulus_tip_deflection_mm": 0.038042460251183456,
+      "independent_faces_tip_deflection_mm": 0.09551694005470827
+    }
+  },
+  "ratios": {
+    "mass": 2.5757789375969793,
+    "grip_stiffness": 8.928536802352864,
+    "lateral_stiffness": 2.2169433367949507,
+    "root_nominal_stress": 0.17500330321497592
+  }
+}

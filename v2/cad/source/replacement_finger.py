@@ -1,4 +1,4 @@
-"""One-piece ribbed direct replacement; two identical parts, opposed by URDF pose."""
+"""Reinforced V2: solid arm, continuous sensor plate and one common access pocket."""
 
 from math import sqrt, pi
 
@@ -16,6 +16,16 @@ def bore(origin, axis, diameter, length):
     return Solid.make_cylinder(diameter / 2, length, Plane(origin=origin, z_dir=axis))
 
 
+def sensor_access_pocket(p=P):
+    """One open rounded rectangular pocket over all six coplanar head seats."""
+    seat = p.sensor_screw_seat_z(p.sensor_axes[0][1])
+    cutter = rounded_window(-p.sensor_access_half_width,p.sensor_access_half_width,
+                            p.sensor_access_y_min,p.sensor_access_y_max,
+                            seat,p.root_top_z+2,p.sensor_access_radius)
+    bottom = [e for e in cutter.edges() if e.bounding_box().max.Z < seat+1e-7]
+    return cutter.fillet(p.sensor_access_floor_radius,bottom)
+
+
 def make_flange(p=P):
     part = box_between(-p.width / 2, p.width / 2, p.mount_y, p.flange_front_y,
                        p.carrier_z_min, p.carrier_z_max)
@@ -30,56 +40,93 @@ def make_flange(p=P):
 
 def make_finger(p=P):
     p.check()
-    part = make_flange(p)
-    rails = box_between(-p.width / 2, p.width / 2, p.sensor_frame_proximal_y, p.tip_y,
-                        p.sensor_rear_z, p.rail_back_z)
-    rails -= box_between(-p.window_half_width, p.window_half_width,
-                         p.window_y_min, p.window_y_max, p.sensor_rear_z - 1, p.rail_back_z + 1)
-    part += rails
-    for x0 in (-p.width / 2, p.width / 2 - p.arm_flange_width):
-        part += box_between(x0, x0 + p.arm_flange_width, p.flange_front_y,
-                            p.sensor_frame_proximal_y, p.arm_front_z,
-                            p.arm_front_z + p.arm_flange_thickness)
-    for x0 in (-p.width / 2, p.width / 2 - p.rib_thickness):
-        rib = Face(Wire.make_polygon([
-            (x0, p.flange_front_y, p.arm_front_z),
-            (x0, p.flange_front_y, p.carrier_z_max),
-            (x0, p.sensor_frame_proximal_y, p.arm_distal_top_z),
-            (x0, p.tip_y, p.rail_back_z),
-            (x0, p.sensor_frame_proximal_y, p.rail_back_z),
-            (x0, p.sensor_frame_proximal_y, p.arm_front_z)], close=True))
-        part += Solid.extrude(rib, (p.rib_thickness, 0, 0))
-    # Curved, open saddle doubles as a mid-span cross brace. No cover traps
-    # the leads; a removable tie restrains the harness well away from its plug.
-    sections = []
-    for i in range(9):
-        y = p.saddle_y_min + i * (p.saddle_y_max - p.saddle_y_min) / 8
-        run = p.bend_start_y - y
-        cos_angle = sqrt(1 - (run / p.cable_bend_radius)**2)
-        z = p.cable_z + p.cable_bend_radius * (1 - cos_angle)
-        top = z - p.cable_thickness / (2 * cos_angle) - p.saddle_cable_clearance
-        sections.append(Wire.make_polygon([(-p.width/2, y, top-p.saddle_thickness),
-            (p.width/2, y, top-p.saddle_thickness), (p.width/2, y, top), (-p.width/2, y, top)], close=True))
-    saddle = Solid.make_loft(sections, ruled=True)
+    x = -p.width/2
+    profile = [(p.mount_y,p.carrier_z_min),(p.root_block_end_y,p.carrier_z_min),
+               (p.root_block_end_y+4,p.arm_front_z),
+               (p.sensor_frame_proximal_y-3.5,p.arm_front_z),
+               (p.sensor_frame_proximal_y,p.sensor_rear_z),(p.tip_y,p.sensor_rear_z),
+               (p.tip_y,p.rail_back_z),(p.sensor_frame_proximal_y,p.arm_distal_top_z),
+               (p.root_block_end_y,p.root_top_z),(p.mount_y,p.root_top_z)]
+    outer = Face(Wire.make_polygon([(x,y,z) for y,z in profile],close=True))
+    # Smooth root/arm and arm/sensor transitions; preserve mounting and tip datums.
+    rounded = [v for v in outer.vertices() if p.mount_y+.01 < v.Y < p.tip_y-.01]
+    outer = outer.fillet_2d(p.transition_fillet,rounded)
+    part = Solid.extrude(outer,(p.width,0,0))
+
+    # Keep the main arm solid. Only the root service opening is retained;
+    # there is no enclosed weight-saving core or internal rib network.
+    part -= rounded_window(-p.service_window_half_width,p.service_window_half_width,
+                           p.service_window_y_min,p.service_window_y_max,-1,p.service_window_top_z,
+                           p.service_window_radius)
+    # Shallow underside relief clears the sensor electronics while retaining
+    # a continuous 3.0 mm floor; the six bearing strips retain the full 3.6 mm.
+    part -= rounded_window(-p.window_half_width,p.window_half_width,p.window_y_min,p.window_y_max,
+                           p.sensor_rear_z-1,p.sensor_rear_z+p.sensor_rear_clearance,1.5)
+    part -= sensor_access_pocket(p)
+
+    # Open rear cable channel follows the OUTER radius of the existing gentle
+    # cable sweep plus clearance. It does not cut the root screw bearing seats.
+    radius = p.cable_bend_radius+p.cable_thickness/2+p.cable_slot_radial_clearance
+    cy,cz = p.bend_start_y,p.cable_z+p.cable_bend_radius
+    y0,y1 = cy-radius,p.cable_slot_end_y
+    z1 = cz-sqrt(radius**2-(y1-cy)**2)
+    ym = (y0+y1)/2
+    zm = cz-sqrt(radius**2-(ym-cy)**2)
+    sx = p.plug_center_x-p.cable_slot_half_width
+    edges = [Edge.make_three_point_arc((sx,y0,cz),(sx,ym,zm),(sx,y1,z1)),
+             Edge.make_line((sx,y1,z1),(sx,y1,60)),Edge.make_line((sx,y1,60),(sx,y0,60)),
+             Edge.make_line((sx,y0,60),(sx,y0,cz))]
+    slot = Solid.extrude(Face(Wire(edges)),(2*p.cable_slot_half_width,0,0))
+    slot &= rounded_window(sx,sx+2*p.cable_slot_half_width,y0-1,y1,-1,61,2)
+    part -= slot
+    # One analytic curved saddle replaces the segmented loft; the cable route,
+    # tie position and open service access remain fixed.
+    top_r = p.cable_bend_radius+p.cable_thickness/2+p.saddle_cable_clearance
+    bottom_r = top_r+p.saddle_thickness
+    def point(y,r):
+        return (-p.width/2,y,cz-sqrt(r*r-(y-cy)**2))
+    y0,y1 = p.saddle_y_min,p.saddle_y_max
+    ym = (y0+y1)/2
+    saddle_face = Face(Wire([
+        Edge.make_three_point_arc(point(y0,top_r),point(ym,top_r),point(y1,top_r)),
+        Edge.make_line(point(y1,top_r),point(y1,bottom_r)),
+        Edge.make_three_point_arc(point(y1,bottom_r),point(ym,bottom_r),point(y0,bottom_r)),
+        Edge.make_line(point(y0,bottom_r),point(y0,top_r))]))
+    saddle = Solid.extrude(saddle_face,(p.width,0,0))
     part += saddle
     for x0 in (-p.width/2, p.width/2-p.rib_thickness):
         part += box_between(x0, x0+p.rib_thickness, p.saddle_y_min, p.saddle_y_max,
                             saddle.bounding_box().min.Z, p.arm_front_z+1)
     for x, y in p.sensor_axes:
-        part -= bore((x, y, p.sensor_rear_z - 1), (0, 0, 1), p.sensor_bore, p.rail_thickness + 2)
-        part -= bore((x, y, p.sensor_screw_seat_z), (0, 0, 1), p.sensor_head_pocket, 30)
+        seat = p.sensor_screw_seat_z(y)
+        part -= bore((x, y, p.sensor_rear_z - 1), (0, 0, 1), p.sensor_bore,
+                     p.sensor_plate_thickness+2)
+        if p.sensor_seat_chamfer:
+            part -= Solid.make_cone(p.sensor_bore/2,p.sensor_bore/2+p.sensor_seat_chamfer,
+                                    p.sensor_seat_chamfer,
+                                    Plane(origin=(x,y,seat-p.sensor_seat_chamfer)))
     for x in p.mount_hole_x:
         for z in p.mount_hole_z:
+            part -= bore((x,p.mount_y-1,z),(0,1,0),p.mount_bore,p.flange_thickness+2)
             part -= bore((x, p.flange_front_y, z), (0, 1, 0), p.mount_head_pocket,
-                         p.mount_head_height + .3)
-            part -= bore((x, p.flange_front_y + p.mount_head_height, z), (0, 1, 0),
-                         p.mount_driver_diameter, p.tip_y - p.flange_front_y + 2)
+                         p.root_head_access_end_y-p.flange_front_y)
+            # A short L-key enters through the root service window. Avoid
+            # drilling long tool tunnels through the sensor bearing rails.
+    part -= bore((0,p.mount_y-1,p.linkage_access_z),(0,1,0),p.linkage_access_diameter,
+                 p.service_window_y_max-p.mount_y+2)
     for x in p.tie_slot_x:
         part -= box_between(x-p.tie_slot_width/2, x+p.tie_slot_width/2,
-                            p.tie_y-p.tie_slot_length/2, p.tie_y+p.tie_slot_length/2, 0, 35)
-    part.label = "V2 replacement finger (print 2; physical fit pending)"
+                            p.tie_y-p.tie_slot_length/2, p.tie_y+p.tie_slot_length/2, 0, p.arm_front_z+.1)
+    part.label = "Reinforced V2 / solid arm and common sensor pocket (physical fit pending)"
     assert part.is_valid and len(part.solids()) == 1
     return part
+
+
+def rounded_window(x0,x1,y0,y1,z0,z1,radius):
+    """Rounded through-opening; corners retain material instead of sharp notches."""
+    face = Face(Wire.make_polygon([(x0,y0,z0),(x1,y0,z0),(x1,y1,z0),(x0,y1,z0)],close=True))
+    face = face.fillet_2d(radius,face.vertices())
+    return Solid.extrude(face,(0,0,z1-z0))
 
 
 def placed_sensor(p=P):
@@ -104,13 +151,25 @@ def hardware(p=P):
         shaft = bore((x, p.flange_front_y - p.mount_screw_length, z), (0, 1, 0),
                      p.mount_screw_diameter, p.mount_screw_length)
         head = bore((x, p.flange_front_y, z), (0, 1, 0), p.mount_head_diameter, p.mount_head_height)
-        screws[f"mount_screw_{i + 1}_assumed_M2x6"] = shaft + head
+        screws[f"mount_screw_{i + 1}_assumed_M2x{p.mount_screw_length:g}"] = shaft + head
     for i, (x, y) in enumerate(p.sensor_axes):
-        shaft = bore((x, y, p.sensor_screw_seat_z - p.sensor_screw_length), (0, 0, 1),
-                     1.6, p.sensor_screw_length)
-        head = bore((x, y, p.sensor_screw_seat_z), (0, 0, 1), 3.0, p.sensor_head_height)
-        screws[f"sensor_screw_{i + 1}_M1p6x4"] = shaft + head
+        from sensor_fasteners import sensor_screw
+        screws[f"sensor_screw_{i + 1}_M1p6x{p.sensor_screw_length(y):g}"] = sensor_screw(x,y,p)
     return screws
+
+
+def root_key_envelope(x,z,angle=0,p=P):
+    """Short L-key; positive angle turns its handle toward the finger centre.
+
+    Install roots before sensors/harness. Diameter is a tool clearance envelope,
+    not a verified socket/hex-key specification.
+    """
+    y = p.root_head_access_end_y
+    shaft = bore((x,p.flange_front_y+p.mount_head_height,z),(0,1,0),
+                 p.mount_driver_diameter,y-p.flange_front_y-p.mount_head_height)
+    handle = bore((x,y,z),(0,0,-1),p.mount_driver_diameter,z+12)
+    handle = Pos(x,0,z)*Rot(0,angle*(1 if x>0 else -1),0)*Pos(-x,0,-z)*handle
+    return shaft+handle
 
 
 def plug_envelope(p=P):
@@ -175,14 +234,18 @@ def strain_relief_band(p=P):
 
 def make_coupon(p=P):
     """Unpowered fit coupon: 3 lanes, nominal / +0.1 / +0.2 mm diameters."""
-    part = box_between(0, 36, 0, 18, 0, 4)
+    part = box_between(0, 36, 0, 18, 0, p.sensor_plate_thickness)
     for i, offset in enumerate((0, .1, .2)):
         x = 6 + 12 * i
-        part -= bore((x, 5, -1), (0, 0, 1), p.mount_bore + offset, 6)
-        part -= bore((x, 13, -1), (0, 0, 1), p.sensor_bore + offset, 6)
-        part -= bore((x, 13, 4 - p.sensor_head_recess), (0, 0, 1), p.sensor_head_pocket + offset, 3)
-        # Edge notches identify lanes without tiny embossed text.
+        part -= bore((x, 5, -1), (0, 0, 1), p.mount_bore + offset, p.sensor_plate_thickness+2)
+        part -= bore((x, 13, -1), (0, 0, 1), p.sensor_bore + offset, p.sensor_plate_thickness+2)
+        if p.sensor_seat_chamfer:
+            part -= Solid.make_cone((p.sensor_bore+offset)/2,(p.sensor_bore+offset)/2+p.sensor_seat_chamfer,
+                                    p.sensor_seat_chamfer,
+                                    Plane(origin=(x,13,p.sensor_plate_thickness-p.sensor_seat_chamfer)))
+        # Edge notches identify lanes without tiny embossed text. A 2.6 mm
+        # pitch leaves 1.6 mm lands instead of fragile 1.0 mm projections.
         for j in range(i + 1):
-            part -= box_between(x - 2 + 2 * j, x - 1 + 2 * j, -.1, 1.3, -1, 5)
+            part -= box_between(x - 2 + 2.6 * j, x - 1 + 2.6 * j, -.1, 1.3, -1, p.sensor_plate_thickness+1)
     part.label = "V2 fastener fit coupon; lanes 1/2/3 = +0/+0.1/+0.2 mm"
     return part

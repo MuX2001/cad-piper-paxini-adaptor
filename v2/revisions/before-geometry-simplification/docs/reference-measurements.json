@@ -1,0 +1,301 @@
+{
+  "units": "mm",
+  "method": "Read-only imports; STL metres multiplied by 1000; no mesh repairs",
+  "carriers": {
+    "1": {
+      "source": "assets/vendor_files/agx_arm_urdf-main/agx_gripper/meshes/gripper_link1.stl",
+      "sha256": "475a7d8db056524d7659fadf5a2c307d62791047b6214d733dfc7846ed1c613d",
+      "retained_triangles": 504,
+      "retained_watertight": true,
+      "retained_bounds_mm": [
+        [
+          -8.500000461935997,
+          -76.49999856948853,
+          4.000000189989805
+        ],
+        [
+          8.500000461935997,
+          -70.00000029802322,
+          26.499999687075615
+        ]
+      ],
+      "mating_plane_boundary_circles": [
+        {
+          "x": -5.999999989522219,
+          "z": 11.24999992789229,
+          "radius": 1.0249998924989805,
+          "max_fit_residual_mm": 3.6680786541509747e-07,
+          "vertices": 13
+        },
+        {
+          "x": -5.999999989521852,
+          "z": 19.250000151484628,
+          "radius": 1.0250000170165747,
+          "max_fit_residual_mm": 3.532893644297985e-07,
+          "vertices": 13
+        },
+        {
+          "x": -6.226884598894406e-14,
+          "z": 12.249999838734418,
+          "radius": 1.5000000610669404,
+          "max_fit_residual_mm": 2.6898167559963326e-07,
+          "vertices": 15
+        },
+        {
+          "x": 5.999999989522209,
+          "z": 11.249999927892263,
+          "radius": 1.0249998924989252,
+          "max_fit_residual_mm": 3.6680783654929883e-07,
+          "vertices": 13
+        },
+        {
+          "x": 5.999999989521801,
+          "z": 19.25000015148465,
+          "radius": 1.025000017016547,
+          "max_fit_residual_mm": 3.532892816071609e-07,
+          "vertices": 13
+        }
+      ],
+      "pilot_cylinders": [
+        {
+          "x": -5.999999989522219,
+          "z": 11.24999992789229,
+          "radius_mm": 0.8,
+          "y_range_mm": [
+            -72.49999791383743,
+            -70.22500038146973
+          ]
+        },
+        {
+          "x": -5.999999989521852,
+          "z": 19.250000151484628,
+          "radius_mm": 0.8,
+          "y_range_mm": [
+            -72.49999791383743,
+            -70.22500038146973
+          ]
+        },
+        {
+          "x": 5.999999989522209,
+          "z": 11.249999927892263,
+          "radius_mm": 0.8,
+          "y_range_mm": [
+            -72.49999791383743,
+            -70.22500038146973
+          ]
+        },
+        {
+          "x": 5.999999989521801,
+          "z": 19.25000015148465,
+          "radius_mm": 0.8,
+          "y_range_mm": [
+            -72.49999791383743,
+            -70.22500038146973
+          ]
+        }
+      ],
+      "removed_reference_triangles": 1582,
+      "thread": "M2 inferred from 1.6 mm pilot and 2.4 mm stock clearance; pitch NOT modeled/verified",
+      "physical_removability": "Separate coincident mating bodies in CAD; verify real hardware before disassembly"
+    },
+    "2": {
+      "source": "assets/vendor_files/agx_arm_urdf-main/agx_gripper/meshes/gripper_link2.stl",
+      "sha256": "3f88d534a85e28a33ef7d2061adacbd1d25214aa9325f9e464aad0f9e4b74606",
+      "retained_triangles": 504,
+      "retained_watertight": true,
+      "retained_bounds_mm": [
+        [
+          -8.500000461935997,
+          -76.49999856948853,
+          4.000000189989805
+        ],
+        [
+          8.500000461935997,
+          -70.00000029802322,
+          26.499999687075615
+        ]
+      ],
+      "mating_plane_boundary_circles": [
+        {
+          "x": -5.999999989522219,
+          "z": 11.24999992789229,
+          "radius": 1.0249998924989805,
+          "max_fit_residual_mm": 3.6680786541509747e-07,
+          "vertices": 13
+        },
+        {
+          "x": -5.999999989521852,
+          "z": 19.250000151484628,
+          "radius": 1.0250000170165747,
+          "max_fit_residual_mm": 3.532893644297985e-07,
+          "vertices": 13
+        },
+        {
+          "x": -6.226884598894406e-14,
+          "z": 12.249999838734418,
+          "radius": 1.5000000610669404,
+          "max_fit_residual_mm": 2.6898167559963326e-07,
+          "vertices": 15
+        },
+        {
+          "x": 5.999999989522209,
+          "z": 11.249999927892263,
+          "radius": 1.0249998924989252,
+          "max_fit_residual_mm": 3.6680783654929883e-07,
+          "vertices": 13
+        },
+        {
+          "x": 5.999999989521801,
+          "z": 19.25000015148465,
+          "radius": 1.025000017016547,
+          "max_fit_residual_mm": 3.532892816071609e-07,
+          "vertices": 13
+        }
+      ],
+      "pilot_cylinders": [
+        {
+          "x": -5.999999989522219,
+          "z": 11.24999992789229,
+          "radius_mm": 0.8,
+          "y_range_mm": [
+            -72.49999791383743,
+            -70.22500038146973
+          ]
+        },
+        {
+          "x": -5.999999989521852,
+          "z": 19.250000151484628,
+          "radius_mm": 0.8,
+          "y_range_mm": [
+            -72.49999791383743,
+            -70.22500038146973
+          ]
+        },
+        {
+          "x": 5.999999989522209,
+          "z": 11.249999927892263,
+          "radius_mm": 0.8,
+          "y_range_mm": [
+            -72.49999791383743,
+            -70.22500038146973
+          ]
+        },
+        {
+          "x": 5.999999989521801,
+          "z": 19.25000015148465,
+          "radius_mm": 0.8,
+          "y_range_mm": [
+            -72.49999791383743,
+            -70.22500038146973
+          ]
+        }
+      ],
+      "removed_reference_triangles": 1582,
+      "thread": "M2 inferred from 1.6 mm pilot and 2.4 mm stock clearance; pitch NOT modeled/verified",
+      "physical_removability": "Separate coincident mating bodies in CAD; verify real hardware before disassembly"
+    }
+  },
+  "sensor": {
+    "axes_xy_native_mm": [
+      [
+        -8.75,
+        3.0
+      ],
+      [
+        -8.75,
+        11.00025981
+      ],
+      [
+        -8.75,
+        19.00051963
+      ],
+      [
+        8.75,
+        3.0
+      ],
+      [
+        8.75,
+        11.00025981
+      ],
+      [
+        8.75,
+        19.00051963
+      ]
+    ],
+    "source": "assets/vendor_files/GEN3\u89e6\u89c9\u4f20\u611f\u56683D\u6a21\u578b/3D Models 3D\u56fe\u7eb8/Finger pad \u6307\u8179 M2324 PX6AX-GEN3-IP-M2324-Core PXSR-STDIP03A.stp",
+    "sha256": "8d57e826d53e185d4657f89595abdb29eb8e7cc2fdd572a87bfa5956ae1b7707"
+  },
+  "functional_reach": {
+    "stock": [
+      {
+        "side": 1,
+        "mount_y_mm": -70.00000029802322,
+        "tip_y_mm": 2.7755575615628914e-14,
+        "reach_mm": 70.00000029802325,
+        "contact_y_mm": [
+          -10.022178292274475,
+          0.0
+        ],
+        "contact_centroid_y_mm": -5.210419428327403,
+        "contact_area_mm2": 229.62416578290856
+      },
+      {
+        "side": 2,
+        "mount_y_mm": -70.00000029802322,
+        "tip_y_mm": 2.7755575615628914e-14,
+        "reach_mm": 70.00000029802325,
+        "contact_y_mm": [
+          -10.022178292274475,
+          0.0
+        ],
+        "contact_centroid_y_mm": -5.210419428327403,
+        "contact_area_mm2": 229.62416578290856
+      }
+    ],
+    "sensor_crown_native_y_mm": [
+      1.602079903898,
+      20.44664874099
+    ],
+    "sensor_crown_faces": 3,
+    "sensor_crown_area_mm2": 318.9418272594828,
+    "crown_definition": "Three broad near-+Z extrusion faces, excluding perimeter bevels and housing"
+  },
+  "parallel_connector_mouths": [
+    {
+      "mouth_x_mm": -3.6,
+      "mouth_y_mm": 18.52025982484005,
+      "body_z_mm": [
+        -1.15,
+        0.25
+      ],
+      "exit_native": [
+        0,
+        1,
+        0
+      ],
+      "exit_jaw": [
+        0,
+        -1,
+        0
+      ]
+    },
+    {
+      "mouth_x_mm": 3.6,
+      "mouth_y_mm": 18.52025982484005,
+      "body_z_mm": [
+        -1.15,
+        0.25000000000000017
+      ],
+      "exit_native": [
+        0,
+        1,
+        0
+      ],
+      "exit_jaw": [
+        0,
+        -1,
+        0
+      ]
+    }
+  ]
+}

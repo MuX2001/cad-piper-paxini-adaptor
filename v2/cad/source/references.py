@@ -116,6 +116,10 @@ def connector_measurements():
 
 
 def cad_mesh(shape, color=(43, 123, 194, 255)):
+    # Discard only in-memory triangulation caches, not B-rep geometry. Prior
+    # STL export at a different tolerance must not change assembly tessellation.
+    from OCP.BRepTools import BRepTools
+    BRepTools.Clean_s(shape.wrapped)
     vertices, faces = shape.tessellate(.04, .15)
     mesh = trimesh.Trimesh(vertices=[tuple(v) for v in vertices], faces=faces, process=True)
     mesh.visual.face_colors = color

@@ -1,0 +1,435 @@
+{
+  "date": "2026-10-16",
+  "units": "mm",
+  "validation_level": "CAD VALIDATED",
+  "print_ready": false,
+  "physical_validation": false,
+  "full_print_release": false,
+  "scope": "Six active STL files = three printable components in native and print placements. Imported vendor meshes, assembly visualization meshes and historical revisions are not current printable exports.",
+  "build_manifest_sha256": "3c60bb3d473c1b39333007f1f5330ece54f168e8d9a365ec005966c4af2c59c4",
+  "baseline": {
+    "printer": "Bambu Lab P2S",
+    "material": "PETG",
+    "nozzle_mm": 0.4,
+    "layer_mm": 0.2,
+    "wall_loops": [
+      4,
+      5
+    ],
+    "infill_percent": [
+      25,
+      35
+    ],
+    "status": "User evaluation baseline; no actual filament/printer process profile or toolpaths generated"
+  },
+  "mesh_method": "Exhaustive AABB sweep, plane clipping and coplanar triangle contacts, allowing only indexed shared-edge/vertex contact; independent edge incidence and vertex-link manifold checks. No repair applied.",
+  "intersection_kernel_cases_passed": [
+    "crossing",
+    "coplanar_overlap",
+    "parallel_separated",
+    "coplanar_disjoint",
+    "shared_edge",
+    "folded_overlap",
+    "shared_vertex",
+    "crossing_beyond_vertex",
+    "unindexed_touch"
+  ],
+  "meshes": {
+    "fastener_coupon.stl": {
+      "sha256": "b39dd67ca065c81e74fdf33a018f52a108e415360d41e3e87258f5fc59f7ff18",
+      "vertices": 1442,
+      "facets": 2904,
+      "watertight": true,
+      "consistent_winding": true,
+      "surface_components": 1,
+      "positive_volume": true,
+      "edges_without_two_faces": 0,
+      "nonmanifold_vertices": 0,
+      "degenerate_faces": 0,
+      "duplicate_faces": 0,
+      "minimum_facet_area_mm2": 0.004162752697384649,
+      "bounds_mm": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          36.0,
+          18.0,
+          3.5999999046325684
+        ]
+      ],
+      "aabb_pairs": 28826,
+      "plane_clip_pairs": 28689,
+      "improper_triangle_intersections": 0,
+      "example_face_pairs": [],
+      "numerical_tolerance_mm": 1e-06,
+      "result": "PASS"
+    },
+    "fastener_coupon_print.stl": {
+      "sha256": "b39dd67ca065c81e74fdf33a018f52a108e415360d41e3e87258f5fc59f7ff18",
+      "vertices": 1442,
+      "facets": 2904,
+      "watertight": true,
+      "consistent_winding": true,
+      "surface_components": 1,
+      "positive_volume": true,
+      "edges_without_two_faces": 0,
+      "nonmanifold_vertices": 0,
+      "degenerate_faces": 0,
+      "duplicate_faces": 0,
+      "minimum_facet_area_mm2": 0.004162752697384649,
+      "bounds_mm": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          36.0,
+          18.0,
+          3.5999999046325684
+        ]
+      ],
+      "aabb_pairs": 28826,
+      "plane_clip_pairs": 28689,
+      "improper_triangle_intersections": 0,
+      "example_face_pairs": [],
+      "numerical_tolerance_mm": 1e-06,
+      "result": "PASS"
+    },
+    "mount_fit_gauge.stl": {
+      "sha256": "4594b53fa7b05f995236f931bc3cca1306b5e9658f46ed79499c92de5bac3237",
+      "vertices": 848,
+      "facets": 1712,
+      "watertight": true,
+      "consistent_winding": true,
+      "surface_components": 1,
+      "positive_volume": true,
+      "edges_without_two_faces": 0,
+      "nonmanifold_vertices": 0,
+      "degenerate_faces": 0,
+      "duplicate_faces": 0,
+      "minimum_facet_area_mm2": 0.05187075546407982,
+      "bounds_mm": [
+        [
+          -14.0,
+          -70.0,
+          4.0
+        ],
+        [
+          14.0,
+          -64.0,
+          26.5
+        ]
+      ],
+      "aabb_pairs": 22856,
+      "plane_clip_pairs": 22612,
+      "improper_triangle_intersections": 0,
+      "example_face_pairs": [],
+      "numerical_tolerance_mm": 1e-06,
+      "result": "PASS"
+    },
+    "mount_fit_gauge_print.stl": {
+      "sha256": "1f8e70c3f0b0bea7fecb6d0d359fbf4e944e4f2a12d4c44018996b52ac3703cc",
+      "vertices": 848,
+      "facets": 1712,
+      "watertight": true,
+      "consistent_winding": true,
+      "surface_components": 1,
+      "positive_volume": true,
+      "edges_without_two_faces": 0,
+      "nonmanifold_vertices": 0,
+      "degenerate_faces": 0,
+      "duplicate_faces": 0,
+      "minimum_facet_area_mm2": 0.05187575709720704,
+      "bounds_mm": [
+        [
+          -14.0,
+          -1.4210854715202004e-14,
+          -2.6645352591003757e-15
+        ],
+        [
+          14.0,
+          22.5,
+          6.0
+        ]
+      ],
+      "aabb_pairs": 22856,
+      "plane_clip_pairs": 22612,
+      "improper_triangle_intersections": 0,
+      "example_face_pairs": [],
+      "numerical_tolerance_mm": 1e-06,
+      "result": "PASS"
+    },
+    "replacement_finger.stl": {
+      "sha256": "a18a66d30a5c616bf989d12f90a0d54e84adff5cfa532b6b9ac0421783eddde9",
+      "vertices": 6226,
+      "facets": 12508,
+      "watertight": true,
+      "consistent_winding": true,
+      "surface_components": 1,
+      "positive_volume": true,
+      "edges_without_two_faces": 0,
+      "nonmanifold_vertices": 0,
+      "degenerate_faces": 0,
+      "duplicate_faces": 0,
+      "minimum_facet_area_mm2": 0.00012376597442198545,
+      "bounds_mm": [
+        [
+          -14.0,
+          -70.0,
+          4.0
+        ],
+        [
+          14.0,
+          3.200000047683716,
+          31.0
+        ]
+      ],
+      "aabb_pairs": 125713,
+      "plane_clip_pairs": 120438,
+      "improper_triangle_intersections": 0,
+      "example_face_pairs": [],
+      "numerical_tolerance_mm": 1e-06,
+      "result": "PASS"
+    },
+    "replacement_finger_print.stl": {
+      "sha256": "f9a40bcb817ddbc34dd0fe81d5c9149967876b3523ff30c8a69cfa4ad72a75df",
+      "vertices": 6226,
+      "facets": 12508,
+      "watertight": true,
+      "consistent_winding": true,
+      "surface_components": 1,
+      "positive_volume": true,
+      "edges_without_two_faces": 0,
+      "nonmanifold_vertices": 0,
+      "degenerate_faces": 0,
+      "duplicate_faces": 0,
+      "minimum_facet_area_mm2": 0.00012376043378026225,
+      "bounds_mm": [
+        [
+          -31.0,
+          0.0,
+          0.0
+        ],
+        [
+          -4.0,
+          73.19999694824219,
+          28.0
+        ]
+      ],
+      "aabb_pairs": 125713,
+      "plane_clip_pairs": 119995,
+      "improper_triangle_intersections": 0,
+      "example_face_pairs": [],
+      "numerical_tolerance_mm": 1e-06,
+      "result": "PASS"
+    }
+  },
+  "dimensions": {
+    "solid_arm_normal_depth_min_mm": 13.711485454795348,
+    "main_web_band_min_mm": 5.0,
+    "root_head_bearing_stack_min_mm": 6.0,
+    "sensor_seat_stacks_mm": [
+      3.6000000000000014,
+      3.6000000000000014,
+      3.6000000000000014,
+      3.6000000000000014,
+      3.6000000000000014,
+      3.6000000000000014
+    ],
+    "continuous_plate_over_electronics_mm": [
+      3.0,
+      3.0,
+      3.0
+    ],
+    "service_side_material_mm": 4.0,
+    "outer_sensor_rail_mm": 3.0,
+    "distal_access_rim_mm": 2.0,
+    "underside_relief_end_land_mm": 1.5000000000000002,
+    "common_pocket_xy_mm": [
+      22.0,
+      21.7
+    ],
+    "cable_saddle_radial_mm": 3.0,
+    "tie_slot_mm": [
+      1.6,
+      3.6
+    ],
+    "method": "B-rep line/solid intersections: 9 bulk-normal, 6 preserved web-band, 16 root, 6 seat and 3 central-plate probes. Exact unchanged root plus arm section comparison in mechanical-comparison.json.",
+    "coupon_identification_land_min_mm": 1.6000000000000014
+  },
+  "interface_exceptions": [
+    "The unchanged root service opening leaves local 4 mm side walls for screw/key and cable access. Main web bands remain at least 5 mm; all root bearing stacks remain 6 mm.",
+    "Sensor interface: 3.6 mm screw-bearing plate, 3.0 mm floor over electronics, 3.0 mm outer rails and 2.0 mm distal pocket rim. These local dimensions preserve short screws and open access, with a continuous supported plate instead of separate pads.",
+    "The shallow underside electronics relief retains its existing 1.5 mm end land over only 0.6 mm depth. This is an interface edge backed by the continuous 3 mm plate, not an isolated thin rim.",
+    "The 3 mm radial cable saddle and 1.6 x 3.6 mm tie slots retain the established cable route and strain relief. This saddle is a cable interface, not the primary arm skin.",
+    "The 0.15 mm bore-mouth chamfer and R0.4 pocket-floor blend are seating reliefs, not thin protrusions. Coupon identification lands remain at least 1.6 mm."
+  ],
+  "STEP_source_equality": {
+    "current_STEP_minus_source_mm3": 0,
+    "source_minus_current_STEP_mm3": 0
+  },
+  "cad_build_screen": {
+    "status": "CAD screening only; NOT VERIFIED in a slicer",
+    "selected_sections": [
+      {
+        "native_x_mm": 5.9,
+        "print_height_mm": 19.9,
+        "section_components": 4,
+        "components_without_previous_section_overlap": []
+      },
+      {
+        "native_x_mm": 9.1,
+        "print_height_mm": 23.1,
+        "section_components": 4,
+        "components_without_previous_section_overlap": []
+      },
+      {
+        "native_x_mm": 11.1,
+        "print_height_mm": 25.1,
+        "section_components": 1,
+        "components_without_previous_section_overlap": []
+      }
+    ],
+    "overhang_screen": {
+      "fastener_coupon_print.stl": {
+        "downward_area_beyond_45_degrees_mm2": 0.0,
+        "flagged_facets": 0,
+        "bounds_mm": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            36.0,
+            18.0,
+            3.5999999046325684
+          ]
+        ]
+      },
+      "mount_fit_gauge_print.stl": {
+        "downward_area_beyond_45_degrees_mm2": 0.0,
+        "flagged_facets": 0,
+        "bounds_mm": [
+          [
+            -14.0,
+            -1.4210854715202004e-14,
+            -2.6645352591003757e-15
+          ],
+          [
+            14.0,
+            22.5,
+            6.0
+          ]
+        ]
+      },
+      "replacement_finger_print.stl": {
+        "downward_area_beyond_45_degrees_mm2": 661.9110085929159,
+        "flagged_facets": 1258,
+        "bounds_mm": [
+          [
+            -31.0,
+            0.0,
+            0.0
+          ],
+          [
+            -4.0,
+            73.19999694824219,
+            28.0
+          ]
+        ]
+      }
+    },
+    "enclosed_arm_core_removed": true,
+    "common_pocket_y_span_mm": 21.7,
+    "common_pocket_straight_y_span_mm": 17.7,
+    "bridge_limit_screen_mm": 10,
+    "support_review": "Common pocket upper sidewall closes across a 17.7 mm straight span in this orientation; accessible support or a slicer-validated bridge is required. Root service opening, cable channel and horizontal holes also require review."
+  },
+  "slicing": {
+    "status": "NOT VERIFIED",
+    "commands_checked": [
+      "bambu-studio",
+      "BambuStudio",
+      "bambustudio",
+      "orca-slicer",
+      "OrcaSlicer",
+      "prusa-slicer",
+      "PrusaSlicer",
+      "slic3r",
+      "cura",
+      "CuraEngine"
+    ],
+    "commands_found": {},
+    "application_paths_found": [],
+    "application_directories_searched": [
+      "/opt",
+      "/home/mu/Applications",
+      "/home/mu/Downloads",
+      "/home/mu/.local/bin",
+      "/home/mu/.local/share/applications",
+      "/home/mu/.local/share/flatpak/app",
+      "/var/lib/flatpak/app",
+      "/home/mu/workspace/deps",
+      "/home/mu/workspace/envs"
+    ],
+    "reason": "No compatible slicer executable/application found",
+    "sliced": false,
+    "slicer_project": null,
+    "filament_g": null,
+    "estimated_time_minutes": null
+  },
+  "checks": [
+    {
+      "check": "Mesh integrity",
+      "result": "PASS",
+      "evidence": "All 6 current STLs: single closed manifold surface, consistent winding, no degenerate/duplicate faces or improper triangle intersections; exact file hashes recorded."
+    },
+    {
+      "check": "Minimum dimensions",
+      "result": "PASS",
+      "evidence": "Solid arm replaces the enclosed cell; preserved 5 mm web bands and 6 mm root seats. Continuous 3.6 mm screw plate / 3 mm electronics floor; interface exceptions documented."
+    },
+    {
+      "check": "Overhangs and bridging",
+      "result": "NOT VERIFIED",
+      "evidence": "No slicer. Enclosed core and isolated pad starts removed; common-pocket closure still exceeds the 10 mm bridge screen. Actual toolpaths remain unknown."
+    },
+    {
+      "check": "Support accessibility",
+      "result": "NOT VERIFIED",
+      "evidence": "Common pocket and root service opening are open to removal tools. No enclosed core remains. Actual generated support accessibility has not been inspected."
+    },
+    {
+      "check": "Mounting and sensor compatibility",
+      "result": "PASS",
+      "evidence": "Reference CAD: unchanged PiPER axes, 17.5 x 8 sensor pattern, sensor plane/reach and cable route; S1-S6 insertion/seat/tool/removal PASS. Actual hardware and plug latch fit remain unverified."
+    },
+    {
+      "check": "Structural orientation",
+      "result": "PASS",
+      "evidence": "Finger X=-14 side down: longitudinal Y and dominant Y-Z grip bending remain in the layer plane, including the root. No quantified printed strength claim; lateral/torsional loading is unvalidated."
+    },
+    {
+      "check": "PETG slicing",
+      "result": "NOT VERIFIED",
+      "evidence": "No compatible slicer executable/application found; no toolpath, filament/time estimate or slicer-native project."
+    }
+  ],
+  "orientations": {
+    "replacement_finger": "Existing print STL: native X=-14 on bed; footprint 27 x 73.2, height 28. Dominant bending in layer plane.",
+    "mount_fit_gauge": "Native Y=-70 mating face on bed; footprint 28 x 22.5, height 6; all bores vertical. An unpowered fit gauge, not a load-bearing finger.",
+    "fastener_coupon": "Flat XY base on bed; 36 x 18, height 3.6; all fit holes and identification cuts vertical. An unpowered fit coupon."
+  },
+  "limits": [
+    "CAD VALIDATED applies to the supplied/reference geometry; actual screws, driver details, tapped usable depth, torque, PETG error and physical fit remain unverified.",
+    "Complete printed-layer continuity and opening retention are NOT VERIFIED; the CAD section screen is not a slicer.",
+    "Actual stepped plug withdrawal/latch geometry remains unresolved: the conservative plug box clips vendor housing, although printed-holder clearance passes.",
+    "Measured CAD section area moments do not establish PETG strength or stiffness for the specified walls and infill. No force, filament usage or time estimate is claimed.",
+    "Existing PRINT-HOLD.md remains unchanged; no full-print release or robot command."
+  ]
+}

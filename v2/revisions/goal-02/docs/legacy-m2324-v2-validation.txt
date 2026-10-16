@@ -1,0 +1,23 @@
+inner_plate: valid STEP solid, watertight STL, 4988.01 mm^3
+outer_roof: valid STEP solid, watertight STL, 7122.73 mm^3
+fit_gauge_inner: valid STEP solid, watertight STL, 2267.04 mm^3
+fit_gauge_roof: valid STEP solid, watertight STL, 2566.86 mm^3
+fastener_coupon: valid STEP solid, watertight STL, 3498.51 mm^3
+finger reference clearance, side/roof/plate (mm): 0.719 0.511 0.6
+sensor STEP: six verified mounting axes at X=±8.75, Y=3/11/19 mm
+sensor vs inner plate: 0.000000 mm^3 overlap
+sensor vs outer roof: 0.000000 mm^3 overlap
+two clamp halves: 0.000000 mm^3 overlap
+nominal minimum webs, nut / sensor head / cable lug (mm): 1.2 1.4 1.4
+each jaw assembly reaches into nominal closed gap: 11.403 mm
+active-face normals: jaw 1 +Y, jaw 2 -Y (opposed)
+clamp/sensor Z-envelope clearance above gripper base: 47.002 mm
+opening   0 mm: paired-jaw Y-envelope gap -22.805 mm
+opening  25 mm: paired-jaw Y-envelope gap 2.195 mm
+opening  30 mm: paired-jaw Y-envelope gap 7.195 mm
+opening  50 mm: paired-jaw Y-envelope gap 27.195 mm
+opening 100 mm: paired-jaw Y-envelope gap 77.195 mm
+posed STL assembly at 30 mm: 7.195 mm Y-envelope gap
+Full closure is unsafe; conservative software trial floor: 30 mm (not a final limit).
+V2 conservative roof allowance 2.096 mm; all four seats support >=2 mm sampled annulus
+V2 unchanged sensor axes/rear plane, unchanged cavity parameters, full distal M3 gauge pair verified

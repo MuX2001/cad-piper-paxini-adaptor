@@ -1,0 +1,1339 @@
+{
+  "status": "reference_geometry_passed_actual_hardware_unverified",
+  "units": "mm",
+  "hardware": {
+    "screw_reference": "M1.6x5 ISO 4762 envelope; NBK SNS/SNSS-M1.6-5 reference; stock unconfirmed",
+    "screw_source": "https://www.nbk1560.com/images/en/product/miniaturescrew/SNS/SNS_1.pdf",
+    "dimensions_source": "https://www.nbk1560.com/images/en/product/technical_data/rokkaku_bolt_NBK/rokkaku_bolt_NBK_1.pdf",
+    "diameter": 1.6,
+    "pitch": 0.35,
+    "length": 5.0,
+    "length_min": 4.76,
+    "length_max": 5.24,
+    "head_diameter": 3.0,
+    "knurled_head_max": 3.14,
+    "head_height": 1.6,
+    "underhead_radius": 0.2,
+    "bearing_diameter_min": 2.72,
+    "socket_af_min": 1.52,
+    "socket_depth_min": 0.7,
+    "tapped_depth_manual": 2.0,
+    "driver_reference": "Wera 2054 Micro 05118066001, 1.5x60",
+    "driver_source": "https://hybris-media.wera.de/download/pdfgenerator-datasheets/en/05118066001.pdf",
+    "driver_product_source": "https://www.wera.de/en-au/tools/2054-screwdriver-for-hexagon-socket-screws-for-electronic-applications",
+    "driver_hex_af": 1.5,
+    "driver_shaft_diameter": 3.0,
+    "driver_blade_length": 60.0,
+    "driver_handle_length": 97.0,
+    "driver_handle_diameter_assumed": 20.0,
+    "driver_axial_engagement": 0.7,
+    "insertion_travel": 30.0,
+    "actual_hardware_confirmed": false
+  },
+  "physical_hardware_supplied": false,
+  "full_print_release": false,
+  "sensor_source_sha256": "8d57e826d53e185d4657f89595abdb29eb8e7cc2fdd572a87bfa5956ae1b7707",
+  "finger_volume_mm3": 25772.859988733722,
+  "mounting_geometry": {
+    "plate_thickness_at_screw_mm": 3.6,
+    "plate_thickness_over_electronics_mm": 3.0,
+    "common_access_size_xy_mm": [
+      22.0,
+      21.7
+    ],
+    "common_access_corner_radius_mm": 2.0,
+    "counterbore_depth_mm": 0.0,
+    "outer_rail_width_mm": 3.0
+  },
+  "scope": "Six positions on each identical finger; attached moving blocks and complete standalone PiPER gripper; q=0/50/100",
+  "continuous_access_argument": "All approach paths travel outward from their jaw. Same-jaw relative poses are fixed; opposing jaw distance increases with opening. Actuator Z bounds are independent of opening.",
+  "clearance_definition": "Minimum free curved screw-surface distance to finger excluding the intended flat bearing planes; seat and mating-thread contact are intentional zero-clearance interfaces. Driver shaft clearance measured by B-rep distance.",
+  "limits": [
+    "No physical screw or driver exists in the supplied assets; catalog references are not an approved BOM",
+    "Major-diameter thread envelope, not helical thread mating or torque analysis",
+    "Driver reduced-tip transition and handle diameter are not fully dimensioned; assumed handle diameter is explicitly recorded; Wera product page labels 97 mm as handle length, whereas PDF table ambiguously labels it overall length",
+    "Manual tapped depth and nominal penetration do not establish fully formed thread engagement or safe tightening torque",
+    "PETG radial/axial error cases are explicit sensitivity assumptions, not measured printer capabilities; coupon and real hardware remain necessary",
+    "Robot arm, surrounding workcell and human hand ergonomics are outside the supplied standalone gripper model"
+  ],
+  "screws": [
+    {
+      "screw": "S1",
+      "jaw_xy_mm": [
+        -8.75,
+        -1.397920096102
+      ],
+      "native_sensor_xy_mm": [
+        -8.75,
+        3.0
+      ],
+      "selected_length_mm": 5.0,
+      "reference_geometry_status": "PASS",
+      "actual_hardware_status": "UNVERIFIED",
+      "overall_status": "UNVERIFIED",
+      "hole": {
+        "type": "blind M1.6 tapped hole: supplied manual PDF p.8",
+        "cad_minor_diameter_mm": 1.25,
+        "cad_minor_cylinder_native_z_mm": [
+          -2.05,
+          -0.05
+        ],
+        "cad_minor_cylinder_length_mm": 1.9999999999999998,
+        "manual_depth_mm": 2.0,
+        "pitch_mm": 0.35,
+        "pitch_basis": "standard coarse pitch; no helix in sensor STEP",
+        "physical_thread_and_full_flank_depth": "UNVERIFIED"
+      },
+      "seating": {
+        "after_status": "PASS",
+        "after_overlap_mm3": 0.0,
+        "flat_seat_z_mm": 12.799999999999999,
+        "relief_mm": 0.15,
+        "head_seat_type": "continuous planar plate, common rounded rectangular pocket; no counterbore",
+        "common_access_width_mm": 22.0,
+        "lateral_mouth_overlap_mm3": 0.0,
+        "minimum_hole_edge_ligament_mm": 3.5479200961020005,
+        "outer_rail_width_mm": 3.0,
+        "seat_to_sensor_stack_mm": 3.5999999999999996,
+        "minimum_floor_thickness_mm": 3.0,
+        "minimum_supported_bearing_annulus_area_mm2": 1.2867963509103435
+      },
+      "insertion": {
+        "status": "PASS",
+        "direction_jaw": [
+          0,
+          0,
+          -1
+        ],
+        "travel_mm": 30.0,
+        "sweep_vs_finger": {
+          "interference_mm3": 0.0,
+          "clearance_mm": 0.0,
+          "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+        },
+        "intentional_thread_envelope_overlap_mm3": 1.264150703865725,
+        "unexpected_sensor_overlap_mm3": 0.0,
+        "method": "continuous axial outer sweep; maximum ISO knurled-head and screw-length envelopes",
+        "max_length_mm": 5.24
+      },
+      "clearance_mm": {
+        "underhead_blend": 0.14142135623730842,
+        "head_wall": 0.2999999999999998,
+        "shaft_wall": 0.2499999999999993,
+        "driver_shaft": 0.75,
+        "minimum_free_surface": 0.14142135623730842,
+        "knurled_head_radial_sensitivity": 0.6799999999999999
+      },
+      "driver": {
+        "status": "PASS for reference envelope",
+        "shaft_and_handle_checks": {
+          "tip_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.9599682447442458,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "shaft_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.75,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "handle_sweep_assumed": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 42.6999999,
+            "method": "conservative bounding-box separation lower bound"
+          }
+        },
+        "against_sensor": {
+          "tip_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 4.4999999999999964,
+            "method": "conservative bounding-box separation lower bound"
+          },
+          "shaft_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 5.199999999999996,
+            "method": "conservative bounding-box separation lower bound"
+          },
+          "handle_sweep_assumed": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 64.5,
+            "method": "conservative bounding-box separation lower bound"
+          }
+        },
+        "nominal_hex_engagement_mm": 0.7,
+        "socket_minimum_depth_mm": 0.7,
+        "socket_AF_clearance_per_flat_mm": 0.010000000000000009,
+        "tool_vs_own_screw_overlap_mm3": 0.0,
+        "highest_pocket_lip_z_mm": 17.12272985349457,
+        "required_slender_reach_mm": 3.4227298534945696,
+        "available_blade_length_mm": 60.0,
+        "handle_axial_standoff_above_lip_mm": 56.57727014650543,
+        "actual_tip_transition_handle_and_torque_engagement": "UNVERIFIED"
+      },
+      "thread_engagement": {
+        "geometric_depth_status": "PASS",
+        "functional_thread_strength_status": "UNVERIFIED",
+        "nominal_penetration_mm": 1.4000000000000004,
+        "length_tolerance_penetration_mm": [
+          1.1600000000000001,
+          1.6400000000000006
+        ],
+        "nominal_bottom_margin_mm": 0.5999999999999996,
+        "max_length_bottom_margin_mm": 0.35999999999999943,
+        "length_and_print_stack_penetration_mm": [
+          1.0100000000000002,
+          1.7900000000000005
+        ],
+        "length_and_print_stack_bottom_margin_mm": 0.20999999999999952,
+        "fully_formed_thread_engagement_mm": null,
+        "limit": "Printed error is an assumed bound only; actual seat/depth tolerances, tap lead, tip chamfer, preload and allowable torque unverified"
+      },
+      "PETG_sensitivity": {
+        "status": "PASS for stated error envelope; physical capability UNVERIFIED",
+        "radial_hole_undersize_mm": 0.15,
+        "axial_stack_error_plus_minus_mm": 0.15,
+        "minimum_blend_clearance_mm": 0.03535533905932666,
+        "max_head_radial_clearance_mm": 0.5299999999999996,
+        "shaft_radial_clearance_mm": 0.09999999999999998,
+        "path_checks": {
+          "insertion": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.0,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "tip_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.9186112627508327,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "shaft_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.5999999999999996,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "handle_sweep_assumed": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 42.6999999,
+            "method": "conservative bounding-box separation lower bound"
+          }
+        }
+      },
+      "complete_assembly_checks": {
+        "jaw1_opening0": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.9302598129200135,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_2_M1p6x5_1"
+          ]
+        },
+        "jaw2_opening0": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.9302598129200135,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_2_M1p6x5_2"
+          ]
+        },
+        "jaw1_opening50": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.9302598129200135,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_2_M1p6x5_1"
+          ]
+        },
+        "jaw2_opening50": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.9302598129200135,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_2_M1p6x5_2"
+          ]
+        },
+        "jaw1_opening100": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.9302598129200135,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_2_M1p6x5_1"
+          ]
+        },
+        "jaw2_opening100": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.9302598129200135,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_2_M1p6x5_2"
+          ]
+        }
+      },
+      "removal": "PASS for reverse path after unscrewing; finger remains attached"
+    },
+    {
+      "screw": "S2",
+      "jaw_xy_mm": [
+        -8.75,
+        -9.398179909022
+      ],
+      "native_sensor_xy_mm": [
+        -8.75,
+        11.00025981292
+      ],
+      "selected_length_mm": 5.0,
+      "reference_geometry_status": "PASS",
+      "actual_hardware_status": "UNVERIFIED",
+      "overall_status": "UNVERIFIED",
+      "hole": {
+        "type": "blind M1.6 tapped hole: supplied manual PDF p.8",
+        "cad_minor_diameter_mm": 1.25,
+        "cad_minor_cylinder_native_z_mm": [
+          -2.05,
+          -0.05
+        ],
+        "cad_minor_cylinder_length_mm": 1.9999999999999998,
+        "manual_depth_mm": 2.0,
+        "pitch_mm": 0.35,
+        "pitch_basis": "standard coarse pitch; no helix in sensor STEP",
+        "physical_thread_and_full_flank_depth": "UNVERIFIED"
+      },
+      "seating": {
+        "after_status": "PASS",
+        "after_overlap_mm3": 0.0,
+        "flat_seat_z_mm": 12.799999999999999,
+        "relief_mm": 0.15,
+        "head_seat_type": "continuous planar plate, common rounded rectangular pocket; no counterbore",
+        "common_access_width_mm": 22.0,
+        "lateral_mouth_overlap_mm3": 0.0,
+        "minimum_hole_edge_ligament_mm": 4.2,
+        "outer_rail_width_mm": 3.0,
+        "seat_to_sensor_stack_mm": 3.5999999999999996,
+        "minimum_floor_thickness_mm": 3.0,
+        "minimum_supported_bearing_annulus_area_mm2": 1.2867963509103435
+      },
+      "insertion": {
+        "status": "PASS",
+        "direction_jaw": [
+          0,
+          0,
+          -1
+        ],
+        "travel_mm": 30.0,
+        "sweep_vs_finger": {
+          "interference_mm3": 0.0,
+          "clearance_mm": 0.0,
+          "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+        },
+        "intentional_thread_envelope_overlap_mm3": 1.2641507038657287,
+        "unexpected_sensor_overlap_mm3": 0.0,
+        "method": "continuous axial outer sweep; maximum ISO knurled-head and screw-length envelopes",
+        "max_length_mm": 5.24
+      },
+      "clearance_mm": {
+        "underhead_blend": 0.1414213562373084,
+        "head_wall": 0.2999999999999998,
+        "shaft_wall": 0.2499999999999991,
+        "driver_shaft": 0.75,
+        "minimum_free_surface": 0.1414213562373084,
+        "knurled_head_radial_sensitivity": 0.6799999999999999
+      },
+      "driver": {
+        "status": "PASS for reference envelope",
+        "shaft_and_handle_checks": {
+          "tip_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.9599682447442458,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "shaft_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.75,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "handle_sweep_assumed": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 42.6999999,
+            "method": "conservative bounding-box separation lower bound"
+          }
+        },
+        "against_sensor": {
+          "tip_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 4.4999999999999964,
+            "method": "conservative bounding-box separation lower bound"
+          },
+          "shaft_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 5.199999999999996,
+            "method": "conservative bounding-box separation lower bound"
+          },
+          "handle_sweep_assumed": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 64.5,
+            "method": "conservative bounding-box separation lower bound"
+          }
+        },
+        "nominal_hex_engagement_mm": 0.7,
+        "socket_minimum_depth_mm": 0.7,
+        "socket_AF_clearance_per_flat_mm": 0.010000000000000009,
+        "tool_vs_own_screw_overlap_mm3": 0.0,
+        "highest_pocket_lip_z_mm": 19.953146682614282,
+        "required_slender_reach_mm": 6.2531466826142825,
+        "available_blade_length_mm": 60.0,
+        "handle_axial_standoff_above_lip_mm": 53.746853317385714,
+        "actual_tip_transition_handle_and_torque_engagement": "UNVERIFIED"
+      },
+      "thread_engagement": {
+        "geometric_depth_status": "PASS",
+        "functional_thread_strength_status": "UNVERIFIED",
+        "nominal_penetration_mm": 1.4000000000000004,
+        "length_tolerance_penetration_mm": [
+          1.1600000000000001,
+          1.6400000000000006
+        ],
+        "nominal_bottom_margin_mm": 0.5999999999999996,
+        "max_length_bottom_margin_mm": 0.35999999999999943,
+        "length_and_print_stack_penetration_mm": [
+          1.0100000000000002,
+          1.7900000000000005
+        ],
+        "length_and_print_stack_bottom_margin_mm": 0.20999999999999952,
+        "fully_formed_thread_engagement_mm": null,
+        "limit": "Printed error is an assumed bound only; actual seat/depth tolerances, tap lead, tip chamfer, preload and allowable torque unverified"
+      },
+      "PETG_sensitivity": {
+        "status": "PASS for stated error envelope; physical capability UNVERIFIED",
+        "radial_hole_undersize_mm": 0.15,
+        "axial_stack_error_plus_minus_mm": 0.15,
+        "minimum_blend_clearance_mm": 0.03535533905932651,
+        "max_head_radial_clearance_mm": 0.5299999999999996,
+        "shaft_radial_clearance_mm": 0.09999999999999998,
+        "path_checks": {
+          "insertion": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.0,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "tip_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.9186112627508327,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "shaft_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.5999999999999996,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "handle_sweep_assumed": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 42.6999999,
+            "method": "conservative bounding-box separation lower bound"
+          }
+        }
+      },
+      "complete_assembly_checks": {
+        "jaw1_opening0": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.9302598129200135,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_1_M1p6x5_1"
+          ]
+        },
+        "jaw2_opening0": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.9302598129200135,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_1_M1p6x5_2"
+          ]
+        },
+        "jaw1_opening50": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.9302598129200135,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_1_M1p6x5_1"
+          ]
+        },
+        "jaw2_opening50": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.9302598129200135,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_1_M1p6x5_2"
+          ]
+        },
+        "jaw1_opening100": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.9302598129200135,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_1_M1p6x5_1"
+          ]
+        },
+        "jaw2_opening100": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.9302598129200135,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_1_M1p6x5_2"
+          ]
+        }
+      },
+      "removal": "PASS for reverse path after unscrewing; finger remains attached"
+    },
+    {
+      "screw": "S3",
+      "jaw_xy_mm": [
+        -8.75,
+        -17.398439721941998
+      ],
+      "native_sensor_xy_mm": [
+        -8.75,
+        19.00051962584
+      ],
+      "selected_length_mm": 5.0,
+      "reference_geometry_status": "PASS",
+      "actual_hardware_status": "UNVERIFIED",
+      "overall_status": "UNVERIFIED",
+      "hole": {
+        "type": "blind M1.6 tapped hole: supplied manual PDF p.8",
+        "cad_minor_diameter_mm": 1.25,
+        "cad_minor_cylinder_native_z_mm": [
+          -2.05,
+          -0.05
+        ],
+        "cad_minor_cylinder_length_mm": 1.9999999999999998,
+        "manual_depth_mm": 2.0,
+        "pitch_mm": 0.35,
+        "pitch_basis": "standard coarse pitch; no helix in sensor STEP",
+        "physical_thread_and_full_flank_depth": "UNVERIFIED"
+      },
+      "seating": {
+        "after_status": "PASS",
+        "after_overlap_mm3": 0.0,
+        "flat_seat_z_mm": 12.799999999999999,
+        "relief_mm": 0.15,
+        "head_seat_type": "continuous planar plate, common rounded rectangular pocket; no counterbore",
+        "common_access_width_mm": 22.0,
+        "lateral_mouth_overlap_mm3": 0.0,
+        "minimum_hole_edge_ligament_mm": 4.2,
+        "outer_rail_width_mm": 3.0,
+        "seat_to_sensor_stack_mm": 3.5999999999999996,
+        "minimum_floor_thickness_mm": 3.0,
+        "minimum_supported_bearing_annulus_area_mm2": 1.286796350910343
+      },
+      "insertion": {
+        "status": "PASS",
+        "direction_jaw": [
+          0,
+          0,
+          -1
+        ],
+        "travel_mm": 30.0,
+        "sweep_vs_finger": {
+          "interference_mm3": 0.0,
+          "clearance_mm": 0.0,
+          "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+        },
+        "intentional_thread_envelope_overlap_mm3": 1.2641507038657274,
+        "unexpected_sensor_overlap_mm3": 0.0,
+        "method": "continuous axial outer sweep; maximum ISO knurled-head and screw-length envelopes",
+        "max_length_mm": 5.24
+      },
+      "clearance_mm": {
+        "underhead_blend": 0.14142135623730748,
+        "head_wall": 0.2999999999999998,
+        "shaft_wall": 0.24999999999999903,
+        "driver_shaft": 0.75,
+        "minimum_free_surface": 0.14142135623730748,
+        "knurled_head_radial_sensitivity": 0.6799999999999999
+      },
+      "driver": {
+        "status": "PASS for reference envelope",
+        "shaft_and_handle_checks": {
+          "tip_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.9599682447442458,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "shaft_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.75,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "handle_sweep_assumed": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 42.6999999,
+            "method": "conservative bounding-box separation lower bound"
+          }
+        },
+        "against_sensor": {
+          "tip_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 4.4999999999999964,
+            "method": "conservative bounding-box separation lower bound"
+          },
+          "shaft_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 5.199999999999996,
+            "method": "conservative bounding-box separation lower bound"
+          },
+          "handle_sweep_assumed": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 64.5,
+            "method": "conservative bounding-box separation lower bound"
+          }
+        },
+        "nominal_hex_engagement_mm": 0.7,
+        "socket_minimum_depth_mm": 0.7,
+        "socket_AF_clearance_per_flat_mm": 0.010000000000000009,
+        "tool_vs_own_screw_overlap_mm3": 0.0,
+        "highest_pocket_lip_z_mm": 22.783563611733996,
+        "required_slender_reach_mm": 9.083563611733997,
+        "available_blade_length_mm": 60.0,
+        "handle_axial_standoff_above_lip_mm": 50.91643638826601,
+        "actual_tip_transition_handle_and_torque_engagement": "UNVERIFIED"
+      },
+      "thread_engagement": {
+        "geometric_depth_status": "PASS",
+        "functional_thread_strength_status": "UNVERIFIED",
+        "nominal_penetration_mm": 1.4000000000000004,
+        "length_tolerance_penetration_mm": [
+          1.1600000000000001,
+          1.6400000000000006
+        ],
+        "nominal_bottom_margin_mm": 0.5999999999999996,
+        "max_length_bottom_margin_mm": 0.35999999999999943,
+        "length_and_print_stack_penetration_mm": [
+          1.0100000000000002,
+          1.7900000000000005
+        ],
+        "length_and_print_stack_bottom_margin_mm": 0.20999999999999952,
+        "fully_formed_thread_engagement_mm": null,
+        "limit": "Printed error is an assumed bound only; actual seat/depth tolerances, tap lead, tip chamfer, preload and allowable torque unverified"
+      },
+      "PETG_sensitivity": {
+        "status": "PASS for stated error envelope; physical capability UNVERIFIED",
+        "radial_hole_undersize_mm": 0.15,
+        "axial_stack_error_plus_minus_mm": 0.15,
+        "minimum_blend_clearance_mm": 0.035355339059324475,
+        "max_head_radial_clearance_mm": 0.5299999999999996,
+        "shaft_radial_clearance_mm": 0.09999999999999998,
+        "path_checks": {
+          "insertion": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.0,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "tip_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.9186112627508327,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "shaft_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.5999999999999996,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "handle_sweep_assumed": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 42.6999999,
+            "method": "conservative bounding-box separation lower bound"
+          }
+        }
+      },
+      "complete_assembly_checks": {
+        "jaw1_opening0": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 0.33000000000000007,
+          "limiting_pair": [
+            "screw_insertion",
+            "plug_1"
+          ]
+        },
+        "jaw2_opening0": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 0.33000000000000096,
+          "limiting_pair": [
+            "screw_insertion",
+            "plug_2"
+          ]
+        },
+        "jaw1_opening50": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 0.33000000000000007,
+          "limiting_pair": [
+            "screw_insertion",
+            "plug_1"
+          ]
+        },
+        "jaw2_opening50": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 0.33000000000000096,
+          "limiting_pair": [
+            "screw_insertion",
+            "plug_2"
+          ]
+        },
+        "jaw1_opening100": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 0.33000000000000007,
+          "limiting_pair": [
+            "screw_insertion",
+            "plug_1"
+          ]
+        },
+        "jaw2_opening100": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 0.33000000000000096,
+          "limiting_pair": [
+            "screw_insertion",
+            "plug_2"
+          ]
+        }
+      },
+      "removal": "PASS for reverse path after unscrewing; finger remains attached"
+    },
+    {
+      "screw": "S4",
+      "jaw_xy_mm": [
+        8.75,
+        -1.397920096102
+      ],
+      "native_sensor_xy_mm": [
+        8.75,
+        3.0
+      ],
+      "selected_length_mm": 5.0,
+      "reference_geometry_status": "PASS",
+      "actual_hardware_status": "UNVERIFIED",
+      "overall_status": "UNVERIFIED",
+      "hole": {
+        "type": "blind M1.6 tapped hole: supplied manual PDF p.8",
+        "cad_minor_diameter_mm": 1.25,
+        "cad_minor_cylinder_native_z_mm": [
+          -2.05,
+          -0.05
+        ],
+        "cad_minor_cylinder_length_mm": 1.9999999999999998,
+        "manual_depth_mm": 2.0,
+        "pitch_mm": 0.35,
+        "pitch_basis": "standard coarse pitch; no helix in sensor STEP",
+        "physical_thread_and_full_flank_depth": "UNVERIFIED"
+      },
+      "seating": {
+        "after_status": "PASS",
+        "after_overlap_mm3": 0.0,
+        "flat_seat_z_mm": 12.799999999999999,
+        "relief_mm": 0.15,
+        "head_seat_type": "continuous planar plate, common rounded rectangular pocket; no counterbore",
+        "common_access_width_mm": 22.0,
+        "lateral_mouth_overlap_mm3": 0.0,
+        "minimum_hole_edge_ligament_mm": 3.5479200961020005,
+        "outer_rail_width_mm": 3.0,
+        "seat_to_sensor_stack_mm": 3.5999999999999996,
+        "minimum_floor_thickness_mm": 3.0,
+        "minimum_supported_bearing_annulus_area_mm2": 1.2867963509103442
+      },
+      "insertion": {
+        "status": "PASS",
+        "direction_jaw": [
+          0,
+          0,
+          -1
+        ],
+        "travel_mm": 30.0,
+        "sweep_vs_finger": {
+          "interference_mm3": 0.0,
+          "clearance_mm": 0.0,
+          "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+        },
+        "intentional_thread_envelope_overlap_mm3": 1.264150703865725,
+        "unexpected_sensor_overlap_mm3": 0.0,
+        "method": "continuous axial outer sweep; maximum ISO knurled-head and screw-length envelopes",
+        "max_length_mm": 5.24
+      },
+      "clearance_mm": {
+        "underhead_blend": 0.14142135623730842,
+        "head_wall": 0.3000000000000007,
+        "shaft_wall": 0.2499999999999993,
+        "driver_shaft": 0.75,
+        "minimum_free_surface": 0.14142135623730842,
+        "knurled_head_radial_sensitivity": 0.6799999999999999
+      },
+      "driver": {
+        "status": "PASS for reference envelope",
+        "shaft_and_handle_checks": {
+          "tip_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.9599682447442451,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "shaft_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.75,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "handle_sweep_assumed": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 42.6999999,
+            "method": "conservative bounding-box separation lower bound"
+          }
+        },
+        "against_sensor": {
+          "tip_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 4.4999999999999964,
+            "method": "conservative bounding-box separation lower bound"
+          },
+          "shaft_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 5.199999999999996,
+            "method": "conservative bounding-box separation lower bound"
+          },
+          "handle_sweep_assumed": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 64.5,
+            "method": "conservative bounding-box separation lower bound"
+          }
+        },
+        "nominal_hex_engagement_mm": 0.7,
+        "socket_minimum_depth_mm": 0.7,
+        "socket_AF_clearance_per_flat_mm": 0.010000000000000009,
+        "tool_vs_own_screw_overlap_mm3": 0.0,
+        "highest_pocket_lip_z_mm": 17.12272985349457,
+        "required_slender_reach_mm": 3.4227298534945696,
+        "available_blade_length_mm": 60.0,
+        "handle_axial_standoff_above_lip_mm": 56.57727014650543,
+        "actual_tip_transition_handle_and_torque_engagement": "UNVERIFIED"
+      },
+      "thread_engagement": {
+        "geometric_depth_status": "PASS",
+        "functional_thread_strength_status": "UNVERIFIED",
+        "nominal_penetration_mm": 1.4000000000000004,
+        "length_tolerance_penetration_mm": [
+          1.1600000000000001,
+          1.6400000000000006
+        ],
+        "nominal_bottom_margin_mm": 0.5999999999999996,
+        "max_length_bottom_margin_mm": 0.35999999999999943,
+        "length_and_print_stack_penetration_mm": [
+          1.0100000000000002,
+          1.7900000000000005
+        ],
+        "length_and_print_stack_bottom_margin_mm": 0.20999999999999952,
+        "fully_formed_thread_engagement_mm": null,
+        "limit": "Printed error is an assumed bound only; actual seat/depth tolerances, tap lead, tip chamfer, preload and allowable torque unverified"
+      },
+      "PETG_sensitivity": {
+        "status": "PASS for stated error envelope; physical capability UNVERIFIED",
+        "radial_hole_undersize_mm": 0.15,
+        "axial_stack_error_plus_minus_mm": 0.15,
+        "minimum_blend_clearance_mm": 0.035355339059326765,
+        "max_head_radial_clearance_mm": 0.5299999999999996,
+        "shaft_radial_clearance_mm": 0.09999999999999998,
+        "path_checks": {
+          "insertion": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.0,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "tip_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.9186112627508327,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "shaft_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.5999999999999996,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "handle_sweep_assumed": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 42.6999999,
+            "method": "conservative bounding-box separation lower bound"
+          }
+        }
+      },
+      "complete_assembly_checks": {
+        "jaw1_opening0": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.9302598129200135,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_5_M1p6x5_1"
+          ]
+        },
+        "jaw2_opening0": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.9302598129200135,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_5_M1p6x5_2"
+          ]
+        },
+        "jaw1_opening50": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.9302598129200135,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_5_M1p6x5_1"
+          ]
+        },
+        "jaw2_opening50": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.9302598129200135,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_5_M1p6x5_2"
+          ]
+        },
+        "jaw1_opening100": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.9302598129200135,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_5_M1p6x5_1"
+          ]
+        },
+        "jaw2_opening100": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.9302598129200135,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_5_M1p6x5_2"
+          ]
+        }
+      },
+      "removal": "PASS for reverse path after unscrewing; finger remains attached"
+    },
+    {
+      "screw": "S5",
+      "jaw_xy_mm": [
+        8.75,
+        -9.398179909022
+      ],
+      "native_sensor_xy_mm": [
+        8.75,
+        11.00025981292
+      ],
+      "selected_length_mm": 5.0,
+      "reference_geometry_status": "PASS",
+      "actual_hardware_status": "UNVERIFIED",
+      "overall_status": "UNVERIFIED",
+      "hole": {
+        "type": "blind M1.6 tapped hole: supplied manual PDF p.8",
+        "cad_minor_diameter_mm": 1.25,
+        "cad_minor_cylinder_native_z_mm": [
+          -2.05,
+          -0.05
+        ],
+        "cad_minor_cylinder_length_mm": 1.9999999999999998,
+        "manual_depth_mm": 2.0,
+        "pitch_mm": 0.35,
+        "pitch_basis": "standard coarse pitch; no helix in sensor STEP",
+        "physical_thread_and_full_flank_depth": "UNVERIFIED"
+      },
+      "seating": {
+        "after_status": "PASS",
+        "after_overlap_mm3": 0.0,
+        "flat_seat_z_mm": 12.799999999999999,
+        "relief_mm": 0.15,
+        "head_seat_type": "continuous planar plate, common rounded rectangular pocket; no counterbore",
+        "common_access_width_mm": 22.0,
+        "lateral_mouth_overlap_mm3": 0.0,
+        "minimum_hole_edge_ligament_mm": 4.2,
+        "outer_rail_width_mm": 3.0,
+        "seat_to_sensor_stack_mm": 3.5999999999999996,
+        "minimum_floor_thickness_mm": 3.0,
+        "minimum_supported_bearing_annulus_area_mm2": 1.286796350910343
+      },
+      "insertion": {
+        "status": "PASS",
+        "direction_jaw": [
+          0,
+          0,
+          -1
+        ],
+        "travel_mm": 30.0,
+        "sweep_vs_finger": {
+          "interference_mm3": 0.0,
+          "clearance_mm": 0.0,
+          "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+        },
+        "intentional_thread_envelope_overlap_mm3": 1.2641507038657287,
+        "unexpected_sensor_overlap_mm3": 0.0,
+        "method": "continuous axial outer sweep; maximum ISO knurled-head and screw-length envelopes",
+        "max_length_mm": 5.24
+      },
+      "clearance_mm": {
+        "underhead_blend": 0.1414213562373085,
+        "head_wall": 0.3000000000000007,
+        "shaft_wall": 0.24999999999999942,
+        "driver_shaft": 0.75,
+        "minimum_free_surface": 0.1414213562373085,
+        "knurled_head_radial_sensitivity": 0.6799999999999999
+      },
+      "driver": {
+        "status": "PASS for reference envelope",
+        "shaft_and_handle_checks": {
+          "tip_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.9599682447442451,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "shaft_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.75,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "handle_sweep_assumed": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 42.6999999,
+            "method": "conservative bounding-box separation lower bound"
+          }
+        },
+        "against_sensor": {
+          "tip_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 4.4999999999999964,
+            "method": "conservative bounding-box separation lower bound"
+          },
+          "shaft_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 5.199999999999996,
+            "method": "conservative bounding-box separation lower bound"
+          },
+          "handle_sweep_assumed": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 64.5,
+            "method": "conservative bounding-box separation lower bound"
+          }
+        },
+        "nominal_hex_engagement_mm": 0.7,
+        "socket_minimum_depth_mm": 0.7,
+        "socket_AF_clearance_per_flat_mm": 0.010000000000000009,
+        "tool_vs_own_screw_overlap_mm3": 0.0,
+        "highest_pocket_lip_z_mm": 19.953146682614282,
+        "required_slender_reach_mm": 6.2531466826142825,
+        "available_blade_length_mm": 60.0,
+        "handle_axial_standoff_above_lip_mm": 53.746853317385714,
+        "actual_tip_transition_handle_and_torque_engagement": "UNVERIFIED"
+      },
+      "thread_engagement": {
+        "geometric_depth_status": "PASS",
+        "functional_thread_strength_status": "UNVERIFIED",
+        "nominal_penetration_mm": 1.4000000000000004,
+        "length_tolerance_penetration_mm": [
+          1.1600000000000001,
+          1.6400000000000006
+        ],
+        "nominal_bottom_margin_mm": 0.5999999999999996,
+        "max_length_bottom_margin_mm": 0.35999999999999943,
+        "length_and_print_stack_penetration_mm": [
+          1.0100000000000002,
+          1.7900000000000005
+        ],
+        "length_and_print_stack_bottom_margin_mm": 0.20999999999999952,
+        "fully_formed_thread_engagement_mm": null,
+        "limit": "Printed error is an assumed bound only; actual seat/depth tolerances, tap lead, tip chamfer, preload and allowable torque unverified"
+      },
+      "PETG_sensitivity": {
+        "status": "PASS for stated error envelope; physical capability UNVERIFIED",
+        "radial_hole_undersize_mm": 0.15,
+        "axial_stack_error_plus_minus_mm": 0.15,
+        "minimum_blend_clearance_mm": 0.03535533905932662,
+        "max_head_radial_clearance_mm": 0.5299999999999996,
+        "shaft_radial_clearance_mm": 0.09999999999999998,
+        "path_checks": {
+          "insertion": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.0,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "tip_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.9186112627508327,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "shaft_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.5999999999999996,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "handle_sweep_assumed": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 42.6999999,
+            "method": "conservative bounding-box separation lower bound"
+          }
+        }
+      },
+      "complete_assembly_checks": {
+        "jaw1_opening0": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.9302598129200135,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_4_M1p6x5_1"
+          ]
+        },
+        "jaw2_opening0": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.9302598129200135,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_4_M1p6x5_2"
+          ]
+        },
+        "jaw1_opening50": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.9302598129200135,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_4_M1p6x5_1"
+          ]
+        },
+        "jaw2_opening50": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.9302598129200135,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_4_M1p6x5_2"
+          ]
+        },
+        "jaw1_opening100": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.9302598129200135,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_4_M1p6x5_1"
+          ]
+        },
+        "jaw2_opening100": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.9302598129200135,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_4_M1p6x5_2"
+          ]
+        }
+      },
+      "removal": "PASS for reverse path after unscrewing; finger remains attached"
+    },
+    {
+      "screw": "S6",
+      "jaw_xy_mm": [
+        8.75,
+        -17.398439721941998
+      ],
+      "native_sensor_xy_mm": [
+        8.75,
+        19.00051962584
+      ],
+      "selected_length_mm": 5.0,
+      "reference_geometry_status": "PASS",
+      "actual_hardware_status": "UNVERIFIED",
+      "overall_status": "UNVERIFIED",
+      "hole": {
+        "type": "blind M1.6 tapped hole: supplied manual PDF p.8",
+        "cad_minor_diameter_mm": 1.25,
+        "cad_minor_cylinder_native_z_mm": [
+          -2.05,
+          -0.05
+        ],
+        "cad_minor_cylinder_length_mm": 1.9999999999999998,
+        "manual_depth_mm": 2.0,
+        "pitch_mm": 0.35,
+        "pitch_basis": "standard coarse pitch; no helix in sensor STEP",
+        "physical_thread_and_full_flank_depth": "UNVERIFIED"
+      },
+      "seating": {
+        "after_status": "PASS",
+        "after_overlap_mm3": 0.0,
+        "flat_seat_z_mm": 12.799999999999999,
+        "relief_mm": 0.15,
+        "head_seat_type": "continuous planar plate, common rounded rectangular pocket; no counterbore",
+        "common_access_width_mm": 22.0,
+        "lateral_mouth_overlap_mm3": 0.0,
+        "minimum_hole_edge_ligament_mm": 4.2,
+        "outer_rail_width_mm": 3.0,
+        "seat_to_sensor_stack_mm": 3.5999999999999996,
+        "minimum_floor_thickness_mm": 3.0,
+        "minimum_supported_bearing_annulus_area_mm2": 1.286796350910343
+      },
+      "insertion": {
+        "status": "PASS",
+        "direction_jaw": [
+          0,
+          0,
+          -1
+        ],
+        "travel_mm": 30.0,
+        "sweep_vs_finger": {
+          "interference_mm3": 0.0,
+          "clearance_mm": 0.0,
+          "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+        },
+        "intentional_thread_envelope_overlap_mm3": 1.2641507038657278,
+        "unexpected_sensor_overlap_mm3": 0.0,
+        "method": "continuous axial outer sweep; maximum ISO knurled-head and screw-length envelopes",
+        "max_length_mm": 5.24
+      },
+      "clearance_mm": {
+        "underhead_blend": 0.14142135623730748,
+        "head_wall": 0.3000000000000007,
+        "shaft_wall": 0.2499999999999979,
+        "driver_shaft": 0.75,
+        "minimum_free_surface": 0.14142135623730748,
+        "knurled_head_radial_sensitivity": 0.6799999999999999
+      },
+      "driver": {
+        "status": "PASS for reference envelope",
+        "shaft_and_handle_checks": {
+          "tip_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.9599682447442451,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "shaft_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.75,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "handle_sweep_assumed": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 42.6999999,
+            "method": "conservative bounding-box separation lower bound"
+          }
+        },
+        "against_sensor": {
+          "tip_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 4.4999999999999964,
+            "method": "conservative bounding-box separation lower bound"
+          },
+          "shaft_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 5.199999999999996,
+            "method": "conservative bounding-box separation lower bound"
+          },
+          "handle_sweep_assumed": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 64.5,
+            "method": "conservative bounding-box separation lower bound"
+          }
+        },
+        "nominal_hex_engagement_mm": 0.7,
+        "socket_minimum_depth_mm": 0.7,
+        "socket_AF_clearance_per_flat_mm": 0.010000000000000009,
+        "tool_vs_own_screw_overlap_mm3": 0.0,
+        "highest_pocket_lip_z_mm": 22.783563611733996,
+        "required_slender_reach_mm": 9.083563611733997,
+        "available_blade_length_mm": 60.0,
+        "handle_axial_standoff_above_lip_mm": 50.91643638826601,
+        "actual_tip_transition_handle_and_torque_engagement": "UNVERIFIED"
+      },
+      "thread_engagement": {
+        "geometric_depth_status": "PASS",
+        "functional_thread_strength_status": "UNVERIFIED",
+        "nominal_penetration_mm": 1.4000000000000004,
+        "length_tolerance_penetration_mm": [
+          1.1600000000000001,
+          1.6400000000000006
+        ],
+        "nominal_bottom_margin_mm": 0.5999999999999996,
+        "max_length_bottom_margin_mm": 0.35999999999999943,
+        "length_and_print_stack_penetration_mm": [
+          1.0100000000000002,
+          1.7900000000000005
+        ],
+        "length_and_print_stack_bottom_margin_mm": 0.20999999999999952,
+        "fully_formed_thread_engagement_mm": null,
+        "limit": "Printed error is an assumed bound only; actual seat/depth tolerances, tap lead, tip chamfer, preload and allowable torque unverified"
+      },
+      "PETG_sensitivity": {
+        "status": "PASS for stated error envelope; physical capability UNVERIFIED",
+        "radial_hole_undersize_mm": 0.15,
+        "axial_stack_error_plus_minus_mm": 0.15,
+        "minimum_blend_clearance_mm": 0.035355339059324586,
+        "max_head_radial_clearance_mm": 0.5299999999999996,
+        "shaft_radial_clearance_mm": 0.09999999999999998,
+        "path_checks": {
+          "insertion": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.0,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "tip_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.9186112627508327,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "shaft_sweep": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 0.5999999999999996,
+            "method": "exact B-rep distance and volume; zero distance may be intentional contact"
+          },
+          "handle_sweep_assumed": {
+            "interference_mm3": 0.0,
+            "clearance_mm": 42.6999999,
+            "method": "conservative bounding-box separation lower bound"
+          }
+        }
+      },
+      "complete_assembly_checks": {
+        "jaw1_opening0": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.930259812919999,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_5_M1p6x5_1"
+          ]
+        },
+        "jaw2_opening0": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.930259812919999,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_5_M1p6x5_2"
+          ]
+        },
+        "jaw1_opening50": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.930259812919999,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_5_M1p6x5_1"
+          ]
+        },
+        "jaw2_opening50": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.930259812919999,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_5_M1p6x5_2"
+          ]
+        },
+        "jaw1_opening100": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.930259812919999,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_5_M1p6x5_1"
+          ]
+        },
+        "jaw2_opening100": {
+          "maximum_interference_mm3": 0.0,
+          "minimum_clearance_lower_bound_mm": 4.930259812919999,
+          "limiting_pair": [
+            "screw_insertion",
+            "sensor_screw_5_M1p6x5_2"
+          ]
+        }
+      },
+      "removal": "PASS for reverse path after unscrewing; finger remains attached"
+    }
+  ]
+}
